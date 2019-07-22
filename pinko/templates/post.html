@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<article>
+    <div class="issue-meta">{{ post.published_at.strftime('%B %-d, %Y') }} &bull; {{ post.issue.name }}</div>
+    <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
+    <header>
+        <h1>{{ post.title }}</h1>
+        <h2>{{ post.subtitle }}</h2>
+        <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+    </header>
+    <div>
+        {{ post.html|safe }}
+    </div>
+</article>
+{% endblock %}
+

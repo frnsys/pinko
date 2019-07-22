@@ -1,0 +1,14 @@
+{% from "_macros.html" import issue_item %}
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="issues">
+{% for issue in issues|reverse %}
+    {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color) }}
+{% endfor %}
+{{ issue_item('Pinko Manifesto', url_for('pinko.manifesto'), '#EEACD0') }}
+</div>
+{% endblock %}
+
+
+

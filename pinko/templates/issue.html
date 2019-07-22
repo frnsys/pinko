@@ -1,0 +1,24 @@
+{% from "_macros.html" import issue_icon, issue_item, issue_post_item %}
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="issue">
+    <div>
+        {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color) }}
+    </div>
+    <div>
+        <div class="issue-meta"><span class="issue-meta--icon">{{ issue_icon(issue.color) }} &bull;</span> {{ issue.published_posts[0].published_at.strftime('%B %-d, %Y') }} &bull; Issue {{ issue.id }}</div>
+        <header>
+            <h1>{{ issue.name }}</h1>
+            <h2>{{ issue.description }}</h2>
+        </header>
+        {% for post in issue.published_posts %}
+            {{ issue_post_item(post) }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+

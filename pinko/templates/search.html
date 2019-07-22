@@ -1,0 +1,19 @@
+{% from "_macros.html" import post_item %}
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form>
+        <input type="text" name="query" value="{{ query or '' }}" placeholder="Query" autofocus />
+        <input type="submit" value="Search" />
+    </form>
+    {% if query %}
+        <h1>Search results for "{{ query }}"</h1>
+        {% if not posts %}
+            <h2>No results found.</h2>
+        {% else %}
+            {% for post in posts %}
+                {{ post_item(post) }}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

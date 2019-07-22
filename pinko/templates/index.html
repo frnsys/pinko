@@ -1,0 +1,25 @@
+{% from "_macros.html" import post_item, issue_icon, issue_item, issue_post_item %}
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="most-recent-issue">
+    <div class="most-recent-issue--display">
+        <h2><span class="most-recent-issue--icon ">{{ issue_icon(issue.color) }} &bull;</span> Most Recent Issue</h2>
+        {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color) }}
+    </div>
+    <div class="most-recent-issue--posts">
+        {% for post in issue.published_posts[:2] %}
+            {{ issue_post_item(post) }}
+        {% endfor %}
+    </div>
+</div>
+<div class="most-recent-posts">
+    <h2>Most Recent Pinko Posts</h2>
+    <div class="most-recent-posts--posts">
+        {% for post in posts %}
+            {{ post_item(post) }}
+        {% endfor %}
+        <a class="most-recent-posts--archive-link" href="{{ url_for('pinko.archive') }}"><span>View Pinko Archive...</span></a>
+    </div>
+</div>
+{% endblock %}

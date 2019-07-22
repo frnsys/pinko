@@ -1,0 +1,359 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: alverata-irregular, serif;
+  background-color: var(--main-bg-color);
+}
+body {
+  padding: 0 1em;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+h1, h2 {
+  font-family: alverata-irregular, serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  max-width: 1080px;
+  margin: 4em auto;
+  display: flex;
+}
+
+nav {
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
+}
+nav.nav-primary {
+  min-width: 160px;
+}
+nav.nav-primary > a {
+  display: block;
+  position: absolute;
+  transition: 0.2s all;
+  margin-bottom: 1.5em;
+}
+nav.nav-primary a:first-child {
+  position: relative;
+  z-index: 2;
+}
+nav.nav-primary:hover > a:nth-child(2) {
+  top: calc((160px)*1) !important;
+  left: 0 !important;
+  z-index: 1 !important;
+}
+nav.nav-primary:hover > a:nth-child(3) {
+  top: calc((160px)*2) !important;
+  left: 0 !important;
+  z-index: 1 !important;
+}
+nav.nav-primary:hover > a:nth-child(4) {
+  top: calc((160px)*3) !important;
+  left: 0 !important;
+  z-index: 1 !important;
+}
+.nav-primary--extra {
+  display: none;
+}
+nav.nav-secondary {
+  margin-left: 2em;
+  padding-right: 2em;
+}
+nav.nav-secondary a,
+.nav-primary--extra a {
+  display: block;
+  font-weight: bold;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+nav.nav-secondary a:hover span,
+.nav-primary--extra a:hover span {
+  border-bottom: 2px solid black;
+}
+nav.nav-secondary a:last-child,
+.nav-primary--extra a:last-child {
+  color: red;
+}
+nav.nav-secondary a:last-child:hover span,
+.nav-primary--extra a:last-child:hover span {
+  border-bottom: 2px solid red;
+}
+
+.content {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.issue-meta {
+  font-size: 0.8em;
+}
+.issue-meta--icon {
+  display: none;
+}
+
+article h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+article header {
+  margin: 0 0 3em 6em;
+}
+article header h2,
+article header h3 {
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0;
+}
+article header h2 {
+  margin-bottom: 0.5em;
+}
+article p {
+  line-height: 1.5;
+}
+
+.issue {
+  display: flex;
+}
+.issue .issue-item {
+  margin-right: 3em;
+}
+.issue header {
+  margin-bottom: 3em;
+}
+.issue h1 {
+  font-size: 4em;
+  margin: 0.25em 0 0 0;
+}
+.issue h2 {
+  font-size: 2.5em;
+  font-weight: normal;
+  margin: 0 0 0 3em;
+}
+.issue--post {
+  margin: 0 0 2em 0;
+}
+.issue--post h3 {
+  margin: 0;
+}
+.issue--post p {
+  margin: 0.25em 0;
+}
+.issue--post--read-more {
+  font-size: 0.9em;
+}
+
+.post-item {
+  display: flex;
+  margin-bottom: 2em;
+}
+.post-item h1 {
+  margin: 0;
+}
+.post-item p {
+  margin: 0.5em 0;
+}
+.post-item--meta {
+  font-size: 0.8em;
+  padding: 0.5em 2em 0 0;
+  line-height: 1.6;
+  width: 8em;
+}
+.post-item--body {
+  flex: 1;
+}
+
+.issues {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 130px);
+  justify-content: space-between;
+}
+.issue-item {
+  margin-bottom: 5em;
+  width: 130px;
+}
+.issue-item--cover h1 {
+  margin: 0;
+  font-size: 1em;
+}
+.issue-item--cover,
+.issue-item--shadow {
+  padding: 1em;
+  height: 120px;
+  width: 80px;
+  position: relative;
+}
+.issue-item--shadow {
+  position: absolute;
+  border: 1px solid black;
+  background: #fff;
+}
+
+.issue-icon {
+  display: inline-block;
+  width: 22px;
+}
+.issue-icon .issue-item--cover, .issue-icon .issue-item--shadow {
+  padding: 0;
+  height: 18px;
+  width: 14px;
+}
+
+.most-recent-issue,
+.most-recent-posts {
+  display: flex;
+}
+.most-recent-issue {
+  flex-direction: row-reverse;
+}
+.most-recent-issue--icon {
+  display: none;
+}
+.most-recent-issue h2 {
+  font-size: 0.9em;
+  margin: 0 0 1em 0;
+}
+.most-recent-issue--posts {
+  padding-right: 4em;
+}
+.most-recent-posts h2 {
+  font-size: 0.9em;
+  margin: 0.5em 1.5em 0 0;
+}
+.most-recent-posts--archive-link {
+  display: block;
+  font-weight: bold;
+  margin: 4em 0 0 8em;
+}
+.most-recent-posts--archive-link:hover span {
+  border-bottom: 2px solid black;
+}
+
+@media only screen and (max-width: 900px) {
+  main {
+    display: block;
+    margin: 1em auto;
+  }
+  nav {
+    min-height: 0;
+    height: auto;
+  }
+  nav.nav-primary {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-bottom: 2em;
+  }
+  nav.nav-primary a {
+    display: block;
+    transition: none;
+    position: static;
+    z-index: 0 !important;
+  }
+  nav.nav-primary:hover > a {
+    margin: 0;
+  }
+  nav.nav-primary .issue-item--cover {
+    height: auto;
+    background: none !important;
+  }
+  nav.nav-primary a:nth-child(1) .issue-item--cover {
+    color: #EEACD0;
+  }
+  nav.nav-primary a:nth-child(2) .issue-item--cover {
+    color: #F17357;
+  }
+  nav.nav-primary a:nth-child(3) .issue-item--cover {
+    color: #d6bc76;
+  }
+  nav.nav-primary a:nth-child(4) .issue-item--cover {
+    color: #EE47E7;
+  }
+  nav.nav-secondary {
+    display: none;
+  }
+  .nav-primary--extra {
+    padding: 0 2em 0 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .most-recent-posts {
+    display: block;
+  }
+  .most-recent-posts h2 {
+    margin-bottom: 1em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  nav.nav-primary {
+    flex-wrap: wrap;
+  }
+  .nav-primary--extra {
+    padding: 1.5em 0;
+    flex-direction: row;
+    width: 100%;
+    text-align: center;
+  }
+  nav.nav-primary a {
+    flex: 1;
+  }
+  nav.nav-primary .issue-item--cover {
+    height: auto;
+    width: auto;
+  }
+
+  /* Hide issue cover graphic */
+  .issue > div:first-child {
+    display: none;
+  }
+  .issue-meta--icon {
+    display: inline;
+  }
+  .issue h2 {
+    margin-left: 0;
+  }
+
+  .post-item {
+    display: block;
+  }
+  .post-item--meta {
+    width: 100%;
+  }
+  .post-item--meta > div {
+    display: inline-block;
+  }
+  .post-item--meta > div::before {
+    content: '\2022  ';
+  }
+  .post-item--meta > div:first-child::before {
+    content: '';
+  }
+
+  article header {
+    margin-left: 0;
+  }
+
+  .most-recent-issue {
+    display: block;
+  }
+  .most-recent-issue--icon {
+    display: inline;
+  }
+  .most-recent-issue .issue-item {
+    display: none;
+  }
+  .most-recent-issue--posts {
+    padding-right: 0;
+  }
+}
