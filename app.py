@@ -6,7 +6,7 @@ from flask_konbini import Konbini
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 app = create_app(config, name='pinko', blueprints=[routes])
-# TODO Konbini(app)
+Konbini(app)
 
 if not app.debug:
     sentry_sdk.init(
