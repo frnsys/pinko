@@ -1,13 +1,35 @@
 {% extends 'layout.html' %}
 
+{% block meta %}
+  <meta property="og:site_name" content="pinko">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ post.title }}">
+  <meta property="og:url" content="{{ request.url }} ">
+  <meta property="og:image" content="{{ post.image.url }}" />
+  <meta property="og:description" content="{{ post.desc }}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@pinkomagazine">
+  <meta name="twitter:title" content="{{ post.title }}">
+  <meta name="twitter:image" content="{{ post.image.url }}" />
+  <meta name="twitter:description" content="{{ post.desc }}">
+{% endblock %}
+
+
 {% block content %}
+<style>
+html, body {
+    background-color: {{ post.issue.background_color }}
+}
+</style>
 <article>
-    <div class="issue-meta">{{ post.published_at.strftime('%B %-d, %Y') }} &bull; {{ post.issue.name }}</div>
     <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
     <header>
+        <div class="post--issue-meta">{{ post.published_at.strftime('%B %-d, %Y') }} &bull; {{ post.issue.name }}</div>
         <h1>{{ post.title }}</h1>
-        <h2>{{ post.subtitle }}</h2>
-        <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+        <div class="post--meta">
+            <h2>{{ post.subtitle }}</h2>
+            <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+        </div>
     </header>
     <div>
         {{ post.html|safe }}

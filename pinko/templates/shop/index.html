@@ -1,0 +1,19 @@
+{% from "shop/_macros.html" import store_item %}
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="stamp-header">
+        <div class="stamp">
+            <div>Store</div>
+            <div>Store</div>
+        </div>
+    </div>
+    {% for p in plans %}
+        {{ store_item(p) }}
+    {% endfor %}
+    {% for p in products %}
+        {{ store_item(p) }}
+    {% endfor %}
+</div>
+{% endblock %}
+

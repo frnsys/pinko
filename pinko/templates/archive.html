@@ -2,6 +2,12 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<div class="stamp-header">
+    <div class="stamp">
+        <div>Archive</div>
+        <div>Archive</div>
+    </div>
+</div>
 {% for post in posts %}
     {{ post_item(post) }}
 {% endfor %}
