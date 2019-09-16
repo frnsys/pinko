@@ -1,6 +1,7 @@
+import config
 from flask_security import current_user
 from taozi.models import Post, Event, Issue
-from flask import Blueprint, render_template, abort, redirect, request
+from flask import Blueprint, render_template, abort, redirect, request, url_for
 
 routes = Blueprint('pinko', __name__)
 
@@ -42,4 +43,8 @@ def search():
 
 @routes.route('/manifesto')
 def manifesto():
-    return 'TODO'
+    return render_template('manifesto.html')
+
+@routes.route('/subscribe')
+def subscribe():
+    return redirect(url_for('shop.plan', id=config.SUBSCRIPTION_PLAN_ID))

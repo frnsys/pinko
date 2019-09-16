@@ -1,11 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: alverata-irregular, serif;
-  background-color: var(--main-bg-color);
-}
-body {
-  padding: 0 1em;
+  font-family: ff-meta-web-pro, sans-serif;
 }
 
 a {
@@ -13,8 +13,8 @@ a {
   text-decoration: none;
 }
 
-h1, h2 {
-  font-family: alverata-irregular, serif;
+h1 {
+  font-weight: 800;
 }
 
 img {
@@ -22,153 +22,183 @@ img {
 }
 
 main {
-  max-width: 1080px;
-  margin: 4em auto;
-  display: flex;
+  max-width: 960px;
+  margin: 1em auto;
+  padding: 0 1.5em;
 }
 
 nav {
-  min-height: 100vh;
-  height: 100%;
-  position: relative;
-}
-nav.nav-primary {
-  min-width: 160px;
-}
-nav.nav-primary > a {
-  display: block;
-  position: absolute;
-  transition: 0.2s all;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 1.5em;
-}
-nav.nav-primary a:first-child {
   position: relative;
-  z-index: 2;
+  z-index: 10;
 }
-nav.nav-primary:hover > a:nth-child(2) {
-  top: calc((160px)*1) !important;
-  left: 0 !important;
-  z-index: 1 !important;
+.nav-primary a {
+  margin-right: 1.5em;
 }
-nav.nav-primary:hover > a:nth-child(3) {
-  top: calc((160px)*2) !important;
-  left: 0 !important;
-  z-index: 1 !important;
+.nav-secondary a {
+  margin-left: 1.5em;
 }
-nav.nav-primary:hover > a:nth-child(4) {
-  top: calc((160px)*3) !important;
-  left: 0 !important;
-  z-index: 1 !important;
-}
-.nav-primary--extra {
-  display: none;
-}
-nav.nav-secondary {
-  margin-left: 2em;
-  padding-right: 2em;
-}
-nav.nav-secondary a,
-.nav-primary--extra a {
-  display: block;
-  font-weight: bold;
-  font-size: 0.9em;
+.nav-primary a:first-child {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-family: alverata-irregular, serif;
   line-height: 1.5;
 }
-nav.nav-secondary a:hover span,
-.nav-primary--extra a:hover span {
+nav .search {
+  display: inline-block;
+}
+nav .search input[type=submit] {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: ff-meta-web-pro, sans-serif;
+  font-size: 1em;
+}
+input[type=text],
+input[type=email] {
+  border: none;
+  background: none;
   border-bottom: 2px solid black;
 }
-nav.nav-secondary a:last-child,
-.nav-primary--extra a:last-child {
-  color: red;
-}
-nav.nav-secondary a:last-child:hover span,
-.nav-primary--extra a:last-child:hover span {
-  border-bottom: 2px solid red;
+input[type=text]::placeholder,
+input[type=email]::placeholder {
+  font-family: ff-meta-web-pro, sans-serif;
+  font-style: italic;
 }
 
-.content {
+.most-recent-issue--post {
   width: 100%;
-  max-width: 780px;
-  margin: 0 auto;
+}
+.most-recent-issue--post-item {
+  padding: 1em;
+  min-width: 320px;
+  max-width: 360px;
+  text-align: left;
+  display: inline-block;
+}
+.most-recent-issue--post h1 {
+  margin-top: 0;
+  text-transform: uppercase;
+}
+.most-recent-issue--post:first-child {
+  text-align: left;
+}
+.most-recent-issue--post:first-child .most-recent-issue--post-item {
+  background: #FF00FF;
+}
+.most-recent-issue--post:nth-child(2) {
+  text-align: center;
+}
+.most-recent-issue--post:nth-child(2) .most-recent-issue--post-item {
+  background: #00FF00;
+}
+.most-recent-issue--post:last-child {
+  text-align: right;
+}
+.most-recent-issue--post:last-child .most-recent-issue--post-item {
+  background: #FBB03B;
 }
 
-.issue-meta {
-  font-size: 0.8em;
-}
-.issue-meta--icon {
-  display: none;
+footer {
+  margin: 4em 0;
 }
 
-article h1 {
-  font-size: 3em;
-  margin-bottom: 0.5em;
-}
-article header {
-  margin: 0 0 3em 6em;
-}
-article header h2,
-article header h3 {
+.stamp {
+  text-transform: uppercase;
+  font-weight: 800;
   font-size: 1em;
-  font-weight: normal;
-  margin: 0;
+  line-height: 1;
+  transform: rotate(-20deg);
+  font-family: alverata-irregular, serif;
 }
-article header h2 {
-  margin-bottom: 0.5em;
-}
-article p {
-  line-height: 1.5;
+.stamp > div:first-child {
+  margin-left: 0.35em;
 }
 
-.issue {
-  display: flex;
-}
-.issue .issue-item {
-  margin-right: 3em;
-}
-.issue header {
-  margin-bottom: 3em;
-}
-.issue h1 {
-  font-size: 4em;
-  margin: 0.25em 0 0 0;
-}
-.issue h2 {
+.stamp-header {
+  color: #C1272D;
+  text-align: center;
   font-size: 2.5em;
-  font-weight: normal;
-  margin: 0 0 0 3em;
+  margin: 2em 0;
 }
-.issue--post {
-  margin: 0 0 2em 0;
+
+.brand {
+  position: fixed;
+  z-index: 2;
 }
-.issue--post h3 {
-  margin: 0;
+
+.brand__top-left {
+  top: 1em;
+  left: 0.5em;
 }
-.issue--post p {
-  margin: 0.25em 0;
+
+.brand__top-right {
+  top: 1em;
+  right: 0.5em;
 }
-.issue--post--read-more {
-  font-size: 0.9em;
+
+.brand__mid-right {
+  top: calc(50% - 1em);
+  right: 0.5em;
+}
+
+.brand__mid-left {
+  top: calc(50% - 1em);
+  left: 0.5em;
+}
+
+.brand__bottom-right {
+  bottom: 1em;
+  right: 0.5em;
+}
+
+.brand__bottom-left {
+  bottom: 1em;
+  left: 0.5em;
 }
 
 .post-item {
   display: flex;
-  margin-bottom: 2em;
+  max-width: 640px;
+  margin: 4em auto;
 }
 .post-item h1 {
   margin: 0;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  line-height: 1.1;
 }
-.post-item p {
-  margin: 0.5em 0;
+.post-item--image {
+  margin: 0 3em 0 0;
+}
+.post-item img {
+  max-width: 160px;
 }
 .post-item--meta {
   font-size: 0.8em;
-  padding: 0.5em 2em 0 0;
-  line-height: 1.6;
-  width: 8em;
+  text-transform: uppercase;
+}
+.post-item--authors {
+  margin-top: 1em;
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: right;
+  font-weight: bold;
 }
 .post-item--body {
   flex: 1;
+}
+
+.most-recent-posts--archive {
+  text-align: center;
+  font-size: 1.6em;
+  font-style: italic;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-family: alverata-irregular, serif;
 }
 
 .issues {
@@ -183,177 +213,391 @@ article p {
 .issue-item--cover h1 {
   margin: 0;
   font-size: 1em;
+  font-family: alverata-irregular, serif;
 }
-.issue-item--cover,
-.issue-item--shadow {
+.issue-item--cover {
   padding: 1em;
-  height: 120px;
-  width: 80px;
+  height: 170px;
+  width: 130px;
   position: relative;
-}
-.issue-item--shadow {
-  position: absolute;
-  border: 1px solid black;
-  background: #fff;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
 }
 
-.issue-icon {
-  display: inline-block;
-  width: 22px;
-}
-.issue-icon .issue-item--cover, .issue-icon .issue-item--shadow {
-  padding: 0;
-  height: 18px;
-  width: 14px;
-}
-
-.most-recent-issue,
-.most-recent-posts {
+.issue--header {
   display: flex;
 }
-.most-recent-issue {
+.issue--header .issue-item {
+  width: 250px;
+  margin-right: 1em;
+  margin-bottom: 0;
+}
+.issue--header .issue-item--cover {
+  width: 220px;
+  height: 300px;
+}
+.issue--intro h1 {
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+article {
+  max-width: 720px;
+  margin: 0 auto;
+}
+article header {
+  position: relative;
+}
+article header h1 {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+.post--meta {
+  margin: 2em 0 4em 6em;
+}
+.post--meta h3 {
+  font-style: italic;
+}
+.post--issue-meta {
+	position: absolute;
+	text-transform: uppercase;
+	transform: ;
+	transform-origin: 100% 0;
+	left: -2.5em;
+	top: 1.5em;
+	transform: translate(-100%) rotate(-90deg);
+}
+
+#manifesto {
+  max-width: 480px;
+  margin: 1em auto;
+  background: #FB8A0A;
+  padding: 2em 3em;
+  color: #D8FFC2;
+  box-shadow: 7px 7px 0px rgba(0,0,0,0.3);
+}
+
+
+/* Shop */
+.store {
+  background: #A546D1;
+}
+
+.store-item {
+  display: flex;
+  max-width: 640px;
+  margin: 4em auto;
+}
+.store-item h1 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  line-height: 1.1;
+}
+.store-item--image {
+  margin: 0 1em 0 0;
+}
+.store-item img {
+  max-width: 160px;
+}
+.store-item:nth-child(odd) {
   flex-direction: row-reverse;
 }
-.most-recent-issue--icon {
-  display: none;
+.store-item:nth-child(odd) .store-item--image {
+  margin: 0 0 0 1em;
 }
-.most-recent-issue h2 {
+
+.product {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+  padding: 0 0 3.5em 0;
+}
+.product--gallery {
+  flex: 1;
+  min-width: 60%;
+}
+.product--info {
+  padding: 1em;
+  min-width: 380px;
+}
+.product--info p {
+  line-height: 1.6;
+}
+.product h1 {
+  font-size: 2.2em;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+.product--gallery img {
+  display: block;
+  margin: 3em 0;
+  width: 100%;
+  border: 1px solid black;
+}
+.product--gallery figure {
+  margin: 0 1em 0 0;
+}
+.product--skus {
+  margin-top: 2em;
+}
+.product--sku {
+  margin-bottom: 0.6em;
+}
+.sku {
+  display: flex;
+  width: 100%;
+}
+.sku > div {
+  flex: 1;
+}
+.sku input[type=submit] {
+  border: 1px solid black;
+  color: black;
+  height: 28px;
+  cursor: pointer;
+  padding: 0.2em 0.5em;
+  box-shadow: 1px 1px 0 0 black;
+  font-family: 'Source Sans Pro', sans-serif;
+  transition: color 0.2s, border-color 0.2s;
+}
+.sku input[type=submit][disabled],
+.sku input[type=submit][disabled]:hover {
+  cursor: default;
+  border: none;
+  box-shadow: none;
+  color: black;
+}
+.sku--name {
+  text-decoration: underline;
+}
+.sku--price {
+  color: black;
+}
+
+.cart, .checkout {
+  max-width: 480px;
+  margin: 6em auto 12em;
+}
+.cart table, .checkout table {
   font-size: 0.9em;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.cart td:last-child,
+.cart .cart--quantity,
+.checkout td:last-child {
+  text-align: right;
+}
+.cart tr:last-child,
+.checkout tr:last-child {
+  font-weight: bold;
+  background: rgba(255,255,255,0.3);
+  color: black;
+}
+.checkout tr:first-child {
+  font-weight: normal;
+  background: none;
+  color: #000;
+}
+.cart .cart--update-quantity {
+  display: inline;
+}
+.cart .cart--update-quantity-symbol {
+  text-align: center;
+}
+.cart input[type=submit] {
+  border: none;
+  padding: 0;
+  display: inline;
+  cursor: pointer;
+}
+
+.checkout .form-field {
+  margin: 0 0 0.5em 0;
+}
+.checkout .form-field label {
+  display: block;
+}
+.checkout .form-field input {
+  width: 100%;
+}
+.checkout .column-2 {
+  display: flex;
+}
+.checkout .column-2 .form-field {
+  flex-basis: 50%;
+}
+.checkout .column-2 .form-field:first-child {
+  padding-right: 1em;
+}
+.checkout input[type=submit],
+.checkout button {
+  width: 100%;
+  display: block;
+  margin: 1em 0;
+  padding: 0.5em;
+  color: #000;
+  background: #fff;
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0.5em;
+  border: 1px solid black;
+  box-shadow: 1px 1px 0 0 black;
+}
+.checkout input[type=submit]:hover,
+.checkout button:hover {
+  background: #eee;
+}
+
+.flashes {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+}
+.flashes li {
+  color: #fff;
+  background: #000;
+  display: inline-block;
+  padding: 0.6em 1em;
+  margin: 0.5em;
+  box-shadow: 2px 2px 0 black;
+  pointer-events: all;
+}
+.flashes li.error {
+  background: #fd3304;
+}
+a.go-checkout {
+  color: #fff;
+  border: none;
+  font-size: 1em;
+  background: #222;
+  cursor: pointer;
+  padding: 0.2em 0.5em;
+  font-family: 'Source Sans Pro', sans-serif;
+  box-shadow: 1px 1px 0 0 black;
+}
+a.go-checkout:hover {
+  background: #333;
+}
+.flashes a.go-checkout {
+  margin-left: 0.5em;
+}
+.cart a.go-checkout {
+  width: 100%;
+  display: block;
+  margin: 1em 0;
+  padding: 0.5em;
+  color: #000;
+  background: #fff;
+  text-align: center;
+  border: 1px solid black;
+  box-shadow: 1px 1px 0 0 black;
+}
+.cart a.go-checkout:hover {
+  background: #eee;
+}
+.cart input[type="submit"] {
+  background: none;
+}
+
+.checkout--warning,
+.checkout--error {
+  color: #fff;
+  font-weight: bold;
   margin: 0 0 1em 0;
 }
-.most-recent-issue--posts {
-  padding-right: 4em;
-}
-.most-recent-posts h2 {
-  font-size: 0.9em;
-  margin: 0.5em 1.5em 0 0;
-}
-.most-recent-posts--archive-link {
-  display: block;
-  font-weight: bold;
-  margin: 4em 0 0 8em;
-}
-.most-recent-posts--archive-link:hover span {
-  border-bottom: 2px solid black;
+
+.thanks {
+  margin: 6em auto 3em auto;
+  text-align: center;
 }
 
-@media only screen and (max-width: 900px) {
-  main {
+.store--subnav img {
+  width: 16px;
+  vertical-align: middle;
+}
+
+footer input[type=submit] {
+  background: none;
+  border: 2px solid black;
+  padding: 0 0.5em;
+  font-family: ff-meta-web-pro, sans-serif;
+  font-size: 1em;
+}
+
+
+@media only screen and (max-width: 1080px) {
+  .brand {
+    display: none;
+  }
+
+  .product {
     display: block;
-    margin: 1em auto;
   }
+  .product--info {
+    min-width: none;
+  }
+  .product--info h1 {
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .sku > div {
+    flex: 0.5;
+  }
+}
+
+@media only screen and (max-width: 760px) {
   nav {
-    min-height: 0;
-    height: auto;
+    flex-direction: column;
   }
-  nav.nav-primary {
+  nav > div {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9em;
-    margin-bottom: 2em;
   }
-  nav.nav-primary a {
-    display: block;
-    transition: none;
-    position: static;
-    z-index: 0 !important;
+  .nav-primary {
+    margin-bottom: 0.5em;
   }
-  nav.nav-primary:hover > a {
+  .nav-primary a, .nav-secondary a {
     margin: 0;
   }
-  nav.nav-primary .issue-item--cover {
-    height: auto;
-    background: none !important;
-  }
-  nav.nav-primary a:nth-child(1) .issue-item--cover {
-    color: #EEACD0;
-  }
-  nav.nav-primary a:nth-child(2) .issue-item--cover {
-    color: #F17357;
-  }
-  nav.nav-primary a:nth-child(3) .issue-item--cover {
-    color: #d6bc76;
-  }
-  nav.nav-primary a:nth-child(4) .issue-item--cover {
-    color: #EE47E7;
-  }
-  nav.nav-secondary {
-    display: none;
-  }
-  .nav-primary--extra {
-    padding: 0 2em 0 1em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .most-recent-posts {
-    display: block;
-  }
-  .most-recent-posts h2 {
-    margin-bottom: 1em;
-  }
 }
 
-@media only screen and (max-width: 600px) {
-  nav.nav-primary {
+@media only screen and (max-width: 480px) {
+  .post-item--image {
+    display: none;
+  }
+
+  .search {
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+  .nav-secondary {
     flex-wrap: wrap;
   }
-  .nav-primary--extra {
-    padding: 1.5em 0;
-    flex-direction: row;
-    width: 100%;
-    text-align: center;
+  .search form {
+    display: flex;
   }
-  nav.nav-primary a {
+  .search input[type=text] {
     flex: 1;
   }
-  nav.nav-primary .issue-item--cover {
-    height: auto;
-    width: auto;
-  }
 
-  /* Hide issue cover graphic */
-  .issue > div:first-child {
-    display: none;
-  }
-  .issue-meta--icon {
-    display: inline;
-  }
-  .issue h2 {
-    margin-left: 0;
-  }
-
-  .post-item {
+  .store-item {
     display: block;
   }
-  .post-item--meta {
-    width: 100%;
-  }
-  .post-item--meta > div {
-    display: inline-block;
-  }
-  .post-item--meta > div::before {
-    content: '\2022  ';
-  }
-  .post-item--meta > div:first-child::before {
-    content: '';
-  }
-
-  article header {
-    margin-left: 0;
-  }
-
-  .most-recent-issue {
-    display: block;
-  }
-  .most-recent-issue--icon {
-    display: inline;
-  }
-  .most-recent-issue .issue-item {
-    display: none;
-  }
-  .most-recent-issue--posts {
-    padding-right: 0;
+  .store-item img {
+    max-width: 100%;
   }
 }
+

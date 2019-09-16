@@ -2,10 +2,6 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <form>
-        <input type="text" name="query" value="{{ query or '' }}" placeholder="Query" autofocus />
-        <input type="submit" value="Search" />
-    </form>
     {% if query %}
         <h1>Search results for "{{ query }}"</h1>
         {% if not posts %}
@@ -15,5 +11,7 @@
                 {{ post_item(post) }}
             {% endfor %}
         {% endif %}
+    {% else %}
+        <h2>No results found.</h2>
     {% endif %}
 {% endblock %}

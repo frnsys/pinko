@@ -1,26 +1,18 @@
 {% macro post_item(post) -%}
-    <div class="post-item">
+<div class="post-item">
+    <div class="post-item--image">
+        <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
+    </div>
+    <div class="post-item--body">
+        <h1><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">{{ post.title }}</a></h1>
         <div class="post-item--meta">
-            <div>{{ post.published_at.strftime('%B %-d, %Y') }}</div>
-            <div>Issue {{ post.issue.id }}</div>
-            <div>{{ post.issue.name }}</div>
+            <span>{{ post.published_at.strftime('%B %-d, %Y') }}</span> &bull;
+            <span>Issue {{ post.issue.id }}</span> &bull;
+            <span>{{ post.issue.name }}</span>
         </div>
-        <div class="post-item--body">
-            <h1><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">{{ post.title }}</a></h1>
-            <p>{{ post.desc }}</p>
-            <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
-        </div>
+        <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
     </div>
-{%- endmacro %}
-
-{% macro issue_icon(color) -%}
-    <div class="issue-icon">
-        <div class="issue-item--cover" style="background:{{color}};">
-            {% for i in range(3) %}
-            <div class="issue-item--shadow" style="z-index:-{{(i+1)}};right:-{{2*(i+1)}}px;bottom:-{{2*(i+1)}}px"></div>
-            {% endfor %}
-        </div>
-    </div>
+</div>
 {%- endmacro %}
 
 {% macro issue_item(name, url, color) -%}
@@ -28,18 +20,7 @@
         <a href="{{ url }}">
             <div class="issue-item--cover" style="background:{{color}};">
                 <h1>{{ name }}</h1>
-                {% for i in range(3) %}
-                <div class="issue-item--shadow" style="z-index:-{{(i+1)}};right:-{{6*(i+1)}}px;bottom:-{{6*(i+1)}}px"></div>
-                {% endfor %}
             </div>
         </a>
-    </div>
-{%- endmacro %}
-
-{% macro issue_post_item(post) -%}
-    <div class="issue--post">
-        <h3><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">{{ post.title }}</a></h3>
-        <p>{{ post.subtitle }}</p>
-        <div class="issue--post--read-more"><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">Read more...</a></div>
     </div>
 {%- endmacro %}
