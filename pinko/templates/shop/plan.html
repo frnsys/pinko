@@ -1,6 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+{% if product.id.endswith(config.SUBSCRIPTION_PLAN_ID) %}
+    <div class="stamp-header">
+        <div class="stamp">
+            <div>Subscribe</div>
+            <div>Subscribe</div>
+        </div>
+    </div>
+{% endif %}
 <div class="product">
     <div class="product--gallery">
         <figure>

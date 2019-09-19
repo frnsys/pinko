@@ -5,11 +5,9 @@
 <div class="most-recent-issue">
     {% for post in issue.published_posts[:3] %}
         <div class="most-recent-issue--post">
-            <div class="most-recent-issue--post-item">
-                <h1>{{ post.title }}</h1>
-                <p>{{ post.desc }}</p>
-                <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
-            </div>
+            <h1><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">{{ post.title }}</a></h1>
+            <p>{{ post.desc }}</p>
+            <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
         </div>
     {% endfor %}
 </div>
