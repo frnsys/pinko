@@ -15,11 +15,13 @@
 </div>
 {%- endmacro %}
 
-{% macro issue_item(name, url, color) -%}
+{% macro issue_item(name, url, color, cover_url) -%}
     <div class="issue-item">
         <a href="{{ url }}">
-            <div class="issue-item--cover" style="background:{{color}};">
-                <h1>{{ name }}</h1>
+            <div class="issue-item--cover" style="{% if cover_url %}background-image:url({{cover_url}});{% else %}background:{{color}};{% endif %}">
+                {% if not cover_url %}
+                    <h1>{{ name }}</h1>
+                {% endif %}
             </div>
         </a>
     </div>

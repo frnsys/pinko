@@ -70,7 +70,7 @@ input[type=email]::placeholder {
 }
 
 .most-recent-issue {
-  height: 28em;
+  height: 32em;
   position: relative;
 }
 .most-recent-issue--post {
@@ -82,7 +82,7 @@ input[type=email]::placeholder {
   width: 320px;
   text-align: left;
   display: inline-block;
-  height: 22em;
+  height: 26em;
   pointer-events: auto;
   position: absolute;
 }
@@ -235,6 +235,8 @@ footer > div:first-child {
   width: 130px;
   position: relative;
   box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+  background-size: cover;
+  background-position: center center;
 }
 
 .issue--header {

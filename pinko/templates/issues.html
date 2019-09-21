@@ -4,7 +4,7 @@
 {% block content %}
 <div class="issues">
 {% for issue in issues|reverse %}
-    {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color) }}
+    {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color, issue.cover_url) }}
 {% endfor %}
 {{ issue_item('Pinko Manifesto', url_for('pinko.manifesto'), '#EEACD0') }}
 </div>
