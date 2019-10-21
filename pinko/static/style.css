@@ -291,7 +291,7 @@ article header h1 {
 }
 
 #masthead {
-  padding: 0 2em;
+  padding: 0 0 0 2em;
 }
 #masthead ul {
   margin: 0;
@@ -629,6 +629,12 @@ footer input[type=submit] {
   }
   .nav-primary a, .nav-secondary a {
     margin: 0;
+  }
+  #about {
+    display: block;
+  }
+  #masthead {
+    padding: 2em 1.5em;
   }
 }
 
