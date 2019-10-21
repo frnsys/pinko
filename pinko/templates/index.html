@@ -2,29 +2,30 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="most-recent-issue">
-    {% for post in issue.published_posts[:3] %}
-        <div class="most-recent-issue--post">
-            <h1><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">{{ post.title }}</a></h1>
-            <p>{{ post.desc }}</p>
-            <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
+<div id="home">
+    <a href="{{ url_for('pinko.about') }}">
+        <div class="stamp">
+            <div>Pinko</div>
+            <div>Pinko</div>
         </div>
-    {% endfor %}
-</div>
-<div class="most-recent-posts">
-    <div class="stamp-header">
+    </a>
+    <a href="{{ url_for('pinko.subscribe') }}" id="home--subscribe">
+        <div class="stamp">
+            <div>Subscribe</div>
+            <div>Subscribe</div>
+        </div>
+    </a>
+    <a href="{{ url_for('pinko.issues') }}" id="home--issues">
+        <div class="stamp">
+            <div>Issues</div>
+            <div>Issues</div>
+        </div>
+    </a>
+    <a href="{{ url_for('pinko.archive') }}" id="home--archive">
         <div class="stamp">
             <div>Archive</div>
             <div>Archive</div>
         </div>
-    </div>
-    <div class="most-recent-posts--posts">
-        {% for post in posts %}
-            {{ post_item(post) }}
-        {% endfor %}
-    </div>
-    <div class="most-recent-posts--archive">
-        <a href="{{ url_for('pinko.archive') }}">View Pinko Archive...</a>
-    </div>
+    </a>
 </div>
 {% endblock %}
