@@ -41,9 +41,9 @@ def search():
     posts = Post.search(query) if query else []
     return render_template('search.html', query=query, posts=posts)
 
-@routes.route('/manifesto')
-def manifesto():
-    return render_template('manifesto.html')
+@routes.route('/about')
+def about():
+    return render_template('about.html')
 
 @routes.route('/subscribe')
 def subscribe():
