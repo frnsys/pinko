@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% macro event_item(post) -%}
+    <div class="event-item">
+        <div class="event-item--image">
+            <a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">
+                <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
+            </a>
+        </div>
+        <div class="event-item--body">
+            <a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}"><h1>{{ post.title }}</h1></a>
+            <h2>{{ post.event }}</h2>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% block content %}
+    <div class="stamp-header">
+        <div class="stamp">
+            <div>Events</div>
+            <div>Events</div>
+        </div>
+    </div>
+    {% for post in events %}
+        {{ event_item(post) }}
+    {% endfor %}
+</div>
+{% endblock %}
+
+

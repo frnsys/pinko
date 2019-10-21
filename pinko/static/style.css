@@ -296,33 +296,40 @@ article header h1 {
   background: #FF3434 !important;
 }
 
-/* Shop */
+/* Shop and Events */
 .store {
   background: #A546D1;
 }
 
-.store-item {
+.store-item, .event-item {
   display: flex;
   max-width: 640px;
   margin: 4em auto;
 }
-.store-item h1 {
+.store-item h1, .event-item h1 {
   margin: 0;
   text-transform: uppercase;
   font-size: 1.8em;
   line-height: 1.1;
 }
-.store-item--image {
+.store-item--image, .event-item--image {
   margin: 0 1em 0 0;
 }
-.store-item img {
+.store-item img, .event-item img {
   max-width: 160px;
 }
-.store-item:nth-child(odd) {
+.store-item:nth-child(odd),
+.event-item:nth-child(odd) {
   flex-direction: row-reverse;
 }
-.store-item:nth-child(odd) .store-item--image {
+.store-item:nth-child(odd) .store-item--image,
+.event-item:nth-child(odd) .event-item--image {
   margin: 0 0 0 1em;
+}
+.event-item h2 {
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 1em;
 }
 
 .product {
@@ -479,7 +486,7 @@ article header h1 {
   text-align: center;
   position: fixed;
   top: 0;
-  z-index: 3;
+  z-index: 100;
   pointer-events: none;
   margin: 0;
   padding: 0;
@@ -612,10 +619,10 @@ footer input[type=submit] {
     flex: 1;
   }
 
-  .store-item {
+  .store-item, .event-item {
     display: block;
   }
-  .store-item img {
+  .store-item img, .event-item img {
     max-width: 100%;
   }
 

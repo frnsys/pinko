@@ -35,6 +35,12 @@ def issues():
     issues = Issue.query.filter(Issue.published).all()
     return render_template('issues.html', issues=issues)
 
+@routes.route('/events')
+def events():
+    events = [e.post for e in Event.query.order_by(Event.end.desc(), Event.start.asc()).all() if e.post.published]
+    print(events)
+    return render_template('events.html', events=events)
+
 @routes.route('/search')
 def search():
     query = request.args.get('query')

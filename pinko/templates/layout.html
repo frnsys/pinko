@@ -48,6 +48,7 @@
                         <input type="text" name="query" value="{{ query or '' }}" aria-label="Query"/>
                     </form>
                 </div>
+                <a href="{{ url_for('pinko.events') }}">Events</a>
                 <a href="{{ url_for('shop.index') }}">Store</a>
                 <a href="{{ url_for("pinko.subscribe") }}">Subscribe</a>
                 {% if 'shop' in request.endpoint %}
