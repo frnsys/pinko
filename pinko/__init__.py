@@ -25,7 +25,7 @@ def issue(slug):
         abort(404)
     return render_template('issue.html', issue=issue)
 
-@routes.route('/archive')
+@routes.route('/magazine')
 def archive():
     posts = Post.query.filter(Post.published).all()
     return render_template('archive.html', posts=posts)

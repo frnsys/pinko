@@ -38,6 +38,14 @@ body {
 #home--archive {
   background: #E91200;
 }
+#squiggle {
+  position: fixed;
+  top: -25%;
+  left: 10%;
+  right: -10%;
+  bottom: 0;
+  z-index: -1;
+}
 
 a {
   color: #000;

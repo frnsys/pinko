@@ -2,6 +2,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<img id="squiggle" src="{{ url_for('static', filename='squiggle.svg') }}" />
 <div id="home">
     <a href="{{ url_for('pinko.about') }}">
         <div class="stamp">
@@ -17,14 +18,14 @@
     </a>
     <a href="{{ url_for('pinko.issues') }}" id="home--issues">
         <div class="stamp">
-            <div>Issues</div>
-            <div>Issues</div>
+            <div>In Print</div>
+            <div>In Print</div>
         </div>
     </a>
     <a href="{{ url_for('pinko.archive') }}" id="home--archive">
         <div class="stamp">
-            <div>Archive</div>
-            <div>Archive</div>
+            <div>Magazine</div>
+            <div>Magazine</div>
         </div>
     </a>
 </div>
