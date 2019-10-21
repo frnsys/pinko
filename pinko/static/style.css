@@ -283,6 +283,34 @@ article header h1 {
 	transform: translate(-100%) rotate(-90deg);
 }
 
+#about {
+  display: flex;
+}
+#about > div {
+  flex: 1;
+}
+
+#masthead {
+  padding: 0 2em;
+}
+#masthead ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#masthead h2 {
+  text-transform: uppercase;
+  margin-bottom: 0;
+  font-weight: 800;
+  font-family: alverata-irregular, serif;
+}
+#masthead hr {
+  background: #000;
+  border: none;
+  height: 1px;
+  margin: 1.5em 0;
+}
+
 #manifesto {
   max-width: 480px;
   margin: 1em auto;
@@ -290,6 +318,9 @@ article header h1 {
   padding: 2em 3em;
   color: #D8FFC2;
   box-shadow: 7px 7px 0px rgba(0,0,0,0.3);
+}
+#manifesto a {
+  text-decoration: underline;
 }
 
 #mc_embed_signup div.mce_inline_error {
@@ -561,6 +592,7 @@ footer input[type=submit] {
   font-family: ff-meta-web-pro, sans-serif;
   font-size: 1em;
 }
+
 
 
 @media only screen and (max-width: 1080px) {
