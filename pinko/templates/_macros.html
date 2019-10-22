@@ -10,6 +10,7 @@
             <span>Issue {{ post.issue.id }}</span> &bull;
             <span>{{ post.issue.name }}</span>
         </div>
+        <p>{{ post.desc }}</p>
         <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
     </div>
 </div>

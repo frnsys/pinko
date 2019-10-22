@@ -16,7 +16,9 @@ html, body {
         </div>
     </div>
     {% for post in issue.published_posts %}
-        {{ post_item(post) }}
+        {% if not post.event %}
+            {{ post_item(post) }}
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
