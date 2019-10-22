@@ -338,10 +338,8 @@ article header h1 {
   list-style-type: none;
 }
 #masthead h2 {
-  text-transform: uppercase;
   margin-bottom: 0;
   font-weight: 800;
-  font-family: alverata-irregular, serif;
 }
 #masthead hr {
   background: #000;
