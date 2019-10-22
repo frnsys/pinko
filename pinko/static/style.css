@@ -677,7 +677,7 @@ footer input[type=submit] {
     display: block;
     text-align: center;
   }
-  #home > div {
+  #home > a {
     display: inline-block;
     max-width: 100%;
     width: 320px;
