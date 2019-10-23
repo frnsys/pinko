@@ -671,6 +671,12 @@ footer input[type=submit] {
   }
 }
 
+#faq ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 @media only screen and (max-width: 760px) {
   nav {
     flex-direction: column;

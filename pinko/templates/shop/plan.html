@@ -38,5 +38,14 @@
         </div>
     </div>
 </div>
+{% if product.id.endswith(config.SUBSCRIPTION_PLAN_ID) %}
+<div id="faq">
+    <h1>FAQ</h1>
+    <ul>
+        <li><h2>How can I change my address or billing info?</h2></li>
+        <li><h2>When can I expect to receive my copy in the mail?</h2></li>
+    </ul>
+</div>
+{% endif %}
 {% endblock %}
 
