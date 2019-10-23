@@ -9,7 +9,7 @@
         </div>
         <div class="store-item--body">
             <a href="{{ url }}"><h1>{{ p.name }}</h1></a>
-            <h2>{{ p.metadata.price }}</h2>
+            <p>{{ p.caption or p.metadata.caption }}</p>
         </div>
     </div>
 {%- endmacro %}
