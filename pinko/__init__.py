@@ -32,7 +32,7 @@ def archive():
 
 @routes.route('/in-print')
 def issues():
-    issues = Issue.query.filter(Issue.published).all()
+    issues = Issue.query.filter(Issue.published, Issue.name != 'Web').all()
     return render_template('issues.html', issues=issues)
 
 @routes.route('/events')
