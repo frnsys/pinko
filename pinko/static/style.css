@@ -347,6 +347,9 @@ article header h1 {
 #masthead {
   padding: 0 0 0 2em;
 }
+#masthead > div p {
+  line-height: 1.3;
+}
 #masthead ul {
   margin: 0;
   padding: 0;
