@@ -9,9 +9,7 @@
     </div>
 </div>
 {% for post in posts %}
-    {% if not post.event %}
-        {{ post_item(post) }}
-    {% endif %}
+    {{ post_item(post) }}
 {% endfor %}
 {% endblock %}
 

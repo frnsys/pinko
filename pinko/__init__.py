@@ -27,7 +27,7 @@ def issue(slug):
 
 @routes.route('/magazine')
 def archive():
-    posts = Post.query.filter(Post.published).all()
+    posts = Post.query.filter(Post.published, Post.print_only==False, Post.event==None).all()
     return render_template('archive.html', posts=posts)
 
 @routes.route('/in-print')
