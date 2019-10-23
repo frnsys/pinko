@@ -18,7 +18,7 @@ def post(issue, slug):
         abort(404)
     return render_template('post.html', post=post)
 
-@routes.route('/issue/<slug>')
+@routes.route('/in-print/<slug>')
 def issue(slug):
     issue = Issue.query.filter(Issue.slug==slug).first_or_404()
     if not issue.published and not current_user.is_authenticated:
@@ -30,7 +30,7 @@ def archive():
     posts = Post.query.filter(Post.published).all()
     return render_template('archive.html', posts=posts)
 
-@routes.route('/issues')
+@routes.route('/in-print')
 def issues():
     issues = Issue.query.filter(Issue.published).all()
     return render_template('issues.html', issues=issues)
@@ -54,3 +54,7 @@ def about():
 @routes.route('/subscribe')
 def subscribe():
     return redirect(url_for('shop.plan', id=config.SUBSCRIPTION_PLAN_ID))
+
+@routes.route('/store/manifesto')
+def manifesto():
+    return redirect(url_for('shop.product', id=config.MANIFESTO_PRODUCT_ID))
