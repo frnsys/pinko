@@ -12,7 +12,7 @@ html, body {
         {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color, issue.cover_url) }}
         <div class="issue--intro">
             <h1>{{ issue.name }}</h1>
-            <p>{{ issue.description }}</p>
+            <p>{{ issue.description|safe }}</p>
         </div>
     </div>
     {% for post in issue.published_posts %}

@@ -1,6 +1,7 @@
 import config
 from flask_security import current_user
 from taozi.models import Post, Event, Issue
+from taozi.compile import compile_markdown
 from flask import Blueprint, render_template, abort, redirect, request, url_for
 
 routes = Blueprint('pinko', __name__)
@@ -23,6 +24,7 @@ def issue(slug):
     issue = Issue.query.filter(Issue.slug==slug).first_or_404()
     if not issue.published and not current_user.is_authenticated:
         abort(404)
+    issue.description = compile_markdown(issue['description'])
     return render_template('issue.html', issue=issue)
 
 @routes.route('/magazine')
