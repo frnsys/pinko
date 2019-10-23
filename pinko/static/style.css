@@ -271,7 +271,7 @@ footer > div:first-child {
 
 .issues {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 130px);
+  grid-template-columns: repeat(auto-fit, 250px);
   justify-content: space-between;
 }
 .issue-item {
@@ -291,6 +291,14 @@ footer > div:first-child {
   box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
   background-size: cover;
   background-position: center center;
+}
+
+.issue-with-caption {
+  display: flex;
+}
+.issue-with-caption > p {
+  margin: 0 1em;
+  min-width: 120px;
 }
 
 .issue--header {
