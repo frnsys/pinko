@@ -244,6 +244,13 @@ footer > div:first-child {
 .post-item--body {
   flex: 1;
 }
+.print-only {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  padding: 0 0.25em;
+  background: #79CEFD;
+  display: inline-block;
+}
 
 .most-recent-posts--archive {
   text-align: center;

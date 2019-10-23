@@ -4,7 +4,13 @@
         <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
     </div>
     <div class="post-item--body">
-        <h1><a href="{{ url_for('pinko.post', issue=post.issue.slug, slug=post.slug) }}">{{ post.title }}</a></h1>
+        {% if post.print_only %}
+            <div class="print-only">Print Only</div>
+            {% set url = post.issue.store_url %}
+        {% else %}
+            {% set url = url_for('pinko.post', issue=post.issue.slug, slug=post.slug) %}
+        {% endif %}
+        <h1><a href="{{ url }}">{{ post.title }}</a></h1>
         <div class="post-item--meta">
             <span>{{ post.published_at.strftime('%B %-d, %Y') }}</span> &bull;
             <span>Issue {{ post.issue.id }}</span> &bull;
