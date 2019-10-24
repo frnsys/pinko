@@ -15,7 +15,7 @@ html, body {
             <p>{{ issue.description|safe }}</p>
         </div>
     </div>
-    {% for post in issue.published_posts %}
+    {% for post in issue.published_posts|sort(attribute='published_at') %}
         {% if not post.event %}
             {{ post_item(post) }}
         {% endif %}
