@@ -9,7 +9,10 @@
         <p>{{ issue.caption }}</p>
     </div>
 {% endfor %}
-{{ issue_item('Pinko Manifesto', url_for('pinko.manifesto'), '#EEACD0') }}
+<div class="issue-with-caption">
+    {{ issue_item('Pinko Manifesto', url_for('pinko.manifesto'), '#EEACD0') }}
+    <p>{{ manifesto.caption }}</p>
+</div>
 </div>
 {% endblock %}
 

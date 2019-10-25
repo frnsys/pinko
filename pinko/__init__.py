@@ -1,4 +1,5 @@
 import config
+from konbini.core import get_product
 from flask_security import current_user
 from taozi.models import Post, Event, Issue
 from taozi.compile import compile_markdown
@@ -35,7 +36,8 @@ def archive():
 @routes.route('/in-print')
 def issues():
     issues = Issue.query.filter(Issue.published, Issue.name != 'Web').all()
-    return render_template('issues.html', issues=issues)
+    manifesto = get_product(config.MANIFESTO_PRODUCT_ID)
+    return render_template('issues.html', issues=issues, manifesto=manifesto)
 
 @routes.route('/events')
 def events():
