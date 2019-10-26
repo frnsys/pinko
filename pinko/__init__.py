@@ -1,8 +1,8 @@
 import config
-from konbini.core import get_product
 from flask_security import current_user
 from taozi.models import Post, Event, Issue
 from taozi.compile import compile_markdown
+from konbini.core import get_product, get_products
 from flask import Blueprint, render_template, abort, redirect, request, url_for
 
 routes = Blueprint('pinko', __name__)
@@ -37,12 +37,12 @@ def archive():
 def issues():
     issues = Issue.query.filter(Issue.published, Issue.name != 'Web').all()
     manifesto = get_product(config.MANIFESTO_PRODUCT_ID)
-    return render_template('issues.html', issues=issues, manifesto=manifesto)
+    zines = [p for p in get_products() if p.metadata.get('zine') == 'true']
+    return render_template('issues.html', issues=issues, manifesto=manifesto, zines=zines)
 
 @routes.route('/events')
 def events():
     events = [e.post for e in Event.query.order_by(Event.end.desc(), Event.start.asc()).all() if e.post.published]
-    print(events)
     return render_template('events.html', events=events)
 
 @routes.route('/search')

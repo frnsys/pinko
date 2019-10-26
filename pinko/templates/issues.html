@@ -9,10 +9,12 @@
         <p>{{ issue.caption }}</p>
     </div>
 {% endfor %}
-<div class="issue-with-caption">
-    {{ issue_item('Pinko Manifesto', url_for('pinko.manifesto'), '#EEACD0') }}
-    <p>{{ manifesto.caption }}</p>
-</div>
+{% for zine in zines|reverse %}
+    <div class="issue-with-caption">
+        {{ issue_item(zine.name, url_for('shop.product', id=zine.id[5:]), '#aaaaaa', zine.images[0]) }}
+        <p>{{ zine.name }}</p>
+    </div>
+{% endfor %}
 </div>
 {% endblock %}
 
