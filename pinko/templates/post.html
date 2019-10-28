@@ -24,11 +24,17 @@ html, body {
 <article>
     <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
     <header>
-        <div class="post--issue-meta">{{ post.published_at.strftime('%B %-d, %Y') }} &bull; {{ post.issue.name }}</div>
+        {% if not post.event %}
+            <div class="post--issue-meta">{{ post.published_at.strftime('%B %-d, %Y') }} &bull; {{ post.issue.name }}</div>
+        {% endif %}
         <h1>{{ post.title }}</h1>
         <div class="post--meta">
-            <h2>{{ post.subtitle }}</h2>
-            <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+            {% if post.event %}
+                <h2>{{ post.event }}</h2>
+            {% else %}
+                <h2>{{ post.subtitle }}</h2>
+                <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+            {% endif %}
         </div>
     </header>
     <div>
