@@ -35,7 +35,10 @@ html, body {
                 <h2>{{ post.event }}</h2>
             {% else %}
                 <h2>{{ post.subtitle }}</h2>
-                <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+                {% set byline = post.authors|join(', ', 'name') %}
+                {% if byline != 'Pinko' %}
+                    <h3>by {{ post.authors|join(', ', 'name') }}</h3>
+                {% endif %}
             {% endif %}
         </div>
     </header>

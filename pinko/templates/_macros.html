@@ -16,7 +16,10 @@
             <span>{{ post.issue.name }}</span>
         </div>
         <p>{{ post.desc }}</p>
-        <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
+        {% set byline = post.authors|join(', ', 'name') %}
+        {% if byline != 'Pinko' %}
+            <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
+        {% endif %}
     </div>
 </div>
 {%- endmacro %}
