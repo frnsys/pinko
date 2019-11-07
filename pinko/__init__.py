@@ -45,6 +45,7 @@ def issues():
 @routes.route('/events')
 def events():
     events = [e.post for e in Event.query.order_by(Event.end.desc(), Event.start.asc()).all() if e.post.published]
+    events.reverse()
     return render_template('events.html', events=events)
 
 @routes.route('/search')
@@ -82,15 +83,15 @@ def shipping():
             'customer_id': s.customer
         }
 
-        # cus_id = s.customer
-        # cus = stripe.Customer.retrieve(cus_id)
-        # shipping = cus.shipping
-        # for k, v in shipping['address'].items():
-        #     row['shipping.{}'.format(k)] = v
-        # row['name'] = cus.shipping['name']
-
-        for k, v in s.metadata.items():
+        cus_id = s.customer
+        cus = stripe.Customer.retrieve(cus_id)
+        shipping = cus.shipping
+        for k, v in shipping['address'].items():
             row['shipping.{}'.format(k)] = v
+        row['name'] = cus.shipping['name']
+
+        # for k, v in s.metadata.items():
+        #     row['shipping.{}'.format(k)] = v
         rows.append(row)
 
     cols = ['customer_id', 'plan', 'status',
