@@ -1,10 +1,8 @@
-import stripe
 import config
 from flask_security import current_user
 from taozi.models import Post, Event, Issue
 from taozi.compile import compile_markdown
 from konbini.core import get_product, get_products
-from flask_security.decorators import roles_required
 from flask import Blueprint, render_template, abort, redirect, request, url_for
 
 routes = Blueprint('pinko', __name__)
@@ -65,37 +63,3 @@ def subscribe():
 @routes.route('/store/manifesto')
 def manifesto():
     return redirect(url_for('shop.product', id=config.MANIFESTO_PRODUCT_ID))
-
-@routes.route('/admin/shipping')
-@roles_required('admin')
-def shipping():
-    subs = []
-    s = stripe.Subscription.list(limit=100)
-    while s:
-        subs.extend(s)
-        s = stripe.Subscription.list(limit=100, starting_after=subs[-1])
-
-    rows = []
-    for s in subs:
-        row = {
-            'status': s.status,
-            'plan': s.plan.nickname,
-            'customer_id': s.customer
-        }
-
-        cus_id = s.customer
-        cus = stripe.Customer.retrieve(cus_id)
-        shipping = cus.shipping
-        if shipping is not None:
-            for k, v in shipping['address'].items():
-                row['shipping.{}'.format(k)] = v
-            row['name'] = cus.shipping['name']
-        else:
-            for k, v in s.metadata.items():
-                row['shipping.{}'.format(k)] = v
-        rows.append(row)
-
-    cols = ['customer_id', 'plan', 'status',
-            'shipping.name', 'shipping.line1', 'shipping.line2',
-            'shipping.postal_code', 'shipping.city', 'shipping.state', 'shipping.country']
-    return render_template('shipping.html', rows=rows, cols=cols)
