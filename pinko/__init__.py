@@ -86,12 +86,13 @@ def shipping():
         cus_id = s.customer
         cus = stripe.Customer.retrieve(cus_id)
         shipping = cus.shipping
-        for k, v in shipping['address'].items():
-            row['shipping.{}'.format(k)] = v
-        row['name'] = cus.shipping['name']
-
-        # for k, v in s.metadata.items():
-        #     row['shipping.{}'.format(k)] = v
+        if shipping is not None:
+            for k, v in shipping['address'].items():
+                row['shipping.{}'.format(k)] = v
+            row['name'] = cus.shipping['name']
+        else:
+            for k, v in s.metadata.items():
+                row['shipping.{}'.format(k)] = v
         rows.append(row)
 
     cols = ['customer_id', 'plan', 'status',
