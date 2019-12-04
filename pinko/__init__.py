@@ -42,7 +42,7 @@ def issues():
 
 @routes.route('/events')
 def events():
-    events = [e.post for e in Event.query.order_by(Event.end.desc(), Event.start.asc()).all() if e.post.published]
+    events = [e.post for e in Event.query.order_by(Event.end.asc(), Event.start.desc()).all() if e.post.published]
     events.reverse()
     return render_template('events.html', events=events)
 
