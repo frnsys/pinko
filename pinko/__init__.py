@@ -56,6 +56,10 @@ def search():
 def about():
     return render_template('about.html')
 
+@routes.route('/legal')
+def legal():
+    return render_template('legal.html')
+
 @routes.route('/subscribe')
 def subscribe():
     return redirect(url_for('shop.plan', id=config.SUBSCRIPTION_PLAN_ID))
