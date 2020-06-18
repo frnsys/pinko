@@ -3,7 +3,7 @@
 {% block content %}
 <div class="product">
     <div class="product--gallery">
-        {% for img in images[1:] %}
+        {% for img in (images[1:] if images|length > 1 else images)%}
             <figure>
                 <img src="{{ img }}" />
             </figure>
