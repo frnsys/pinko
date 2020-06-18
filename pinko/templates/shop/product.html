@@ -26,6 +26,7 @@
                 <div class="product--sku">
                     <form action='{{ url_for('shop.cart') }}' method='POST'>
                         <input type='hidden' name='sku' value={{ sku.id }}>
+                        <input type='hidden' name='product' value={{ product.id }}>
                         <input type='hidden' name='name' value='{{ product.name }} - {{ sku.attributes.values()|join(', ') }}'>
                         <div class="sku">
                             <div>
@@ -46,6 +47,7 @@
                 <div class="product--sku">
                     <form action='{{ url_for('shop.subscribe' if price.recurring else 'shop.cart') }}' method='POST'>
                         <input type='hidden' name='sku' value={{ price.id }}>
+                        <input type='hidden' name='product' value={{ product.id }}>
                         {% if price.nickname %}
                             <input type='hidden' name='name' value='{{ product.name }} - {{ price.nickname }}'>
                         {% else %}
