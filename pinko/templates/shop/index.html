@@ -8,12 +8,8 @@
             <div>Store</div>
         </div>
     </div>
-    {% for p in plans %}
-        {{ store_item(p) }}
-    {% endfor %}
     {% for p in products %}
         {{ store_item(p) }}
     {% endfor %}
 </div>
 {% endblock %}
-

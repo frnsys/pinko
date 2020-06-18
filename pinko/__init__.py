@@ -42,7 +42,7 @@ def issues():
 
 @routes.route('/events')
 def events():
-    events = [e.post for e in Event.query.order_by(Event.end.asc(), Event.start.desc()).all() if e.post.published]
+    events = [e.post for e in Event.query.order_by(Event.start.desc(), Event.end.desc()).all() if e.post.published]
     events.reverse()
     return render_template('events.html', events=events)
 
@@ -62,7 +62,7 @@ def legal():
 
 @routes.route('/subscribe')
 def subscribe():
-    return redirect(url_for('shop.plan', id=config.SUBSCRIPTION_PLAN_ID))
+    return redirect(url_for('shop.product', id=config.SUBSCRIPTION_PLAN_ID))
 
 @routes.route('/store/manifesto')
 def manifesto():
