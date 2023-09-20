@@ -22,22 +22,16 @@
         <h1>{{ product.name }}</h1>
         <p>{{ product.description|safe }}</p>
 
-        <div class="product--skus">
-            {% if skus|length == 0 and prices|length == 0 %}
+        <div class="product--price">
+            {% if not product.default_price %}
                 <div>Not currently available.</div>
-            {% endif %}
-
-            <div class="product--sku">
-                <form action='{{ url_for('shop.cart') }}' method='POST'>
+            {% else %}
+                <form style="display:flex" action='{{ url_for('shop.cart') }}' method='POST'>
                     {{form.hidden_tag()}}
-                    <div class="sku">
-                        <div>
-                            <div class="sku--price">{{ '${:,.2f}'.format(product.default_price.unit_amount/100) }}</div>
-                        </div>
-                        <input type="submit" value='Add to Cart'>
-                    </div>
+                    <div class="sku--price">{{ '${:,.2f}'.format(product.default_price.unit_amount/100) }}</div>
+                    <input style="margin-left:auto" type="submit" value='Add to Cart'>
                 </form>
-            </div>
+            {% endif %}
         </div>
       </div>
       <div class="product--additional">

@@ -61,7 +61,7 @@
 
     <main>
         {% if 'shop' in request.endpoint and 'product' not in request.endpoint %}
-          <img id="squiggle" src="{{ url_for('static', filename='squiggle.svg') }}" />
+          <img id="squiggle" src="{{ url_for('static', filename='pink-squiggle.svg') }}" />
         {% elif 'product' not in request.endpoint and 'issue' not in request.endpoint and 'post' not in request.endpoint %}
           <img id="squiggle" src="{{ url_for('static', filename='squiggle.svg') }}" />
         {% endif %}
@@ -72,10 +72,10 @@
         <footer id="footer">
           <div id='footer_links'>
             <a href="{{ url_for('shop.index') }}">Purchase</a>
-            <a href="{{ url_for('pinko.archive') }}">Writing</a>
-            <a href="{{ url_for('pinko.about') }}">Contact</a>
-            <!-- TODO: IMPLEMENT CONTACT PAGE -->
             <a href="{{ url_for('pinko.about') }}">About</a>
+            <a href="{{ url_for('pinko.donate') }}">Support</a>
+            <a href="{{ url_for('pinko.archive') }}">Writing</a>
+            <!-- TODO: IMPLEMENT CONTACT PAGE -->
           </div>
           <div id='communism_for_fags'>Communism for fags!</div>
           {% include "_subscribe_form.html" %}

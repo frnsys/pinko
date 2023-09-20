@@ -15,18 +15,12 @@ def intro():
 
 @routes.route('/')
 def index():
-    new_post = Post.query.filter(Post.published).order_by(Post.id.desc()).first()
-    issue = new_post.issue
-    if issue.name == "Web":
-        banner = {'name': new_post.title,
-        'description': new_post.desc,
-        'image': new_post.image.path,
-        'path': url_for('pinko.post', slug=new_post.slug)}
-    else:
-        banner = {'name': issue.name,
-        'description': issue.__getitem__('description'),
-        'image': issue.__getitem__('cover_url'),
-        'path': url_for('pinko.issue', slug=issue.slug)}
+
+    banner = {'name': Meta.get_by_slug('banner-title'),
+    'description': Meta.get_by_slug('banner-description'),
+    'image': Meta.get_by_slug('banner-image-url'),
+    'path': Meta.get_by_slug('banner-url')}
+
     posts = Post.query.filter(Post.published).limit(2)
 
     products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PRODUCT_ID]
@@ -112,5 +106,5 @@ def product(id):
     p = get_product(id)
     also = get_products()
     also.remove(p)
-    form = AddToCartForm(name=p.name, sku=p.default_price.id, product=p.id)
+    form = AddToCartForm(name=p.name, sku=p.default_price.id, product=p.id) if p.default_price else ''
     return render_template('shop/product.html', product=p, form=form, also=sample(also,2))

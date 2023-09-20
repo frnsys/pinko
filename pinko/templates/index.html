@@ -4,11 +4,11 @@
 
 {% block content %}
 <div id="home">
-  <a href="{{banner['path']}}" id="home--new">
-    <div id="home--new--banner" style="background-image:url({{banner['image']}})"></div>
+  <a href="{{banner['path'].text|safe}}" id="home--new">
+    <div id="home--new--banner" style="background-image:url({{banner['image'].text|safe}})"></div>
     <div id="home--new--text">
-      <div id="home--new--header">New on Pinko: {{banner['name']}}</div>
-      <div id="home--new--description">{{banner['description']}}</div>
+      <div id="home--new--header">New on Pinko: {{banner['name'].text|safe}}</div>
+      <div id="home--new--description">{{banner['description'].text|safe}}</div>
     </div>
   </a>
 
