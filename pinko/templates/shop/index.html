@@ -3,13 +3,14 @@
 
 {% block content %}
     <div class="stamp-header">
-        <div class="stamp">
-            <div>Store</div>
-            <div>Store</div>
+        <div class="stamp" style="color:black">
+            <div>Purchase</div>
         </div>
     </div>
+    <div id="purchase--grid">
     {% for p in products %}
-        {{ store_item(p) }}
+        {{ store_item(p, 'card-b') }}
     {% endfor %}
+    </div>
 </div>
 {% endblock %}

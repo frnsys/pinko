@@ -1,0 +1,21 @@
+{% from "_macros.html" import post_item, pagination %}
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="stamp-header" style="display:flex">
+    <div id="writing--tabs">
+      <a href="/in-print">In Print</a>
+      <a href="/magazine" style="text-decoration: underline">Online</a>
+    </div>
+    <div class="stamp" style="margin:auto">
+        <div>WRITING</div>
+    </div>
+    <div style="width:30%"></div>
+</div>
+<div id="writing--grid">
+{% for post in posts %}
+    {{ post_item(post, 'card-b') }}
+{% endfor %}
+</div>
+{{ pagination(paginator, 'pinko.archive') }}
+{% endblock %}

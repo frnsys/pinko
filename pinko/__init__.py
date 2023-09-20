@@ -1,17 +1,46 @@
 import config
+from random import sample
 from flask_security import current_user
-from taozi.models import Post, Event, Issue
-from taozi.compile import compile_markdown
-from konbini.core import get_product, get_products
-from flask import Blueprint, render_template, abort, redirect, request, url_for
+from .taozi_local.taozi.models import Post, Event, Issue, Meta
+from .konbini.konbini.forms import AddToCartForm
+from .taozi_local.taozi.compile import compile_markdown
+from .konbini.konbini.core import get_product, get_products
+from flask import Blueprint, make_response, render_template, abort, redirect, request, url_for
 
 routes = Blueprint('pinko', __name__)
 
+@routes.route('/intro')
+def intro():
+    return render_template('intro.html')
+
 @routes.route('/')
 def index():
-    issue = Issue.query.filter(Issue.published).order_by(Issue.id.desc()).first()
-    posts = Post.query.filter(Post.published).limit(3)
-    return render_template('index.html', issue=issue, posts=posts)
+    new_post = Post.query.filter(Post.published).order_by(Post.id.desc()).first()
+    issue = new_post.issue
+    if issue.name == "Web":
+        banner = {'name': new_post.title,
+        'description': new_post.desc,
+        'image': new_post.image.path,
+        'path': url_for('pinko.post', slug=new_post.slug)}
+    else:
+        banner = {'name': issue.name,
+        'description': issue.__getitem__('description'),
+        'image': issue.__getitem__('cover_url'),
+        'path': url_for('pinko.issue', slug=issue.slug)}
+    posts = Post.query.filter(Post.published).limit(2)
+
+    products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PRODUCT_ID]
+    products = products[0:4]
+
+    popup = 'none' if ('popup' in request.cookies) else ''
+    resp = make_response(render_template('index.html',
+        products=products,
+        banner=banner,
+        posts=posts,
+        popup=popup))
+    if 'popup' not in request.cookies: resp.set_cookie('popup', '')
+
+    return resp
 
 @routes.route('/<issue>/<slug>')
 def post(issue, slug):
@@ -25,13 +54,23 @@ def issue(slug):
     issue = Issue.query.filter(Issue.slug==slug).first_or_404()
     if not issue.published and not current_user.is_authenticated:
         abort(404)
+    product_id = issue.__getitem__('product_id')
+    product = get_product(product_id) if product_id else ''
+
+    form = AddToCartForm(name=product.name, sku=product.default_price.id, product=product.id)
+
     issue.description = compile_markdown(issue['description'])
-    return render_template('issue.html', issue=issue)
+    return render_template('issue.html', issue=issue, product=product, form=form)
 
 @routes.route('/magazine')
 def archive():
-    posts = Post.query.filter(Post.published, Post.print_only==False, Post.event==None).all()
-    return render_template('archive.html', posts=posts)
+    data = request.args
+    page = int(data.get('page', 1))
+
+    # TODO: add print_only back
+    # posts = Post.query.filter(Post.published, Post.print_only==False Post.event==None).all()
+    posts = Post.query.filter(Post.published, Post.event==None).paginate(page, per_page=6)
+    return render_template('writing.html', posts=posts.items, paginator=posts)
 
 @routes.route('/in-print')
 def issues():
@@ -54,16 +93,24 @@ def search():
 
 @routes.route('/about')
 def about():
-    return render_template('about.html')
+    issns = Meta.get_by_slug('issns')
+    about = Meta.get_by_slug('about')
+    collective = Meta.get_by_slug('collective')
+    return render_template('about.html', issns=issns, about=about, collective=collective)
 
 @routes.route('/legal')
 def legal():
     return render_template('legal.html')
 
-@routes.route('/subscribe')
-def subscribe():
-    return redirect(url_for('shop.product', id=config.SUBSCRIPTION_PLAN_ID))
+@routes.route('/donate')
+def donate():
+    donate = Meta.get_by_slug('donate')
+    return render_template('donate.html', donate=donate)
 
-@routes.route('/store/manifesto')
-def manifesto():
-    return redirect(url_for('shop.product', id=config.MANIFESTO_PRODUCT_ID))
+@routes.route('/shop/product/<id>')
+def product(id):
+    p = get_product(id)
+    also = get_products()
+    also.remove(p)
+    form = AddToCartForm(name=p.name, sku=p.default_price.id, product=p.id)
+    return render_template('shop/product.html', product=p, form=form, also=sample(also,2))

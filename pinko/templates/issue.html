@@ -9,13 +9,21 @@ html, body {
 </style>
 <div class="issue">
     <div class="issue--header">
-        {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color, issue.cover_url) }}
+        {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color, issue.store_url) }}
         <div class="issue--intro">
             <h1>{{ issue.name }}</h1>
             <p>{{ issue.description|safe }}</p>
+            <div class="issue--shop" style="display:flex">
+                <div>{{'${:,.2f}'.format(product.default_price.unit_amount/100)}}</div>
+
+                <form action="{{ url_for('shop.cart') }}" method='POST'>
+                    {{ form.hidden_tag() }}
+                    <input type="submit" value='Add to Cart'>
+                </form>
+            </div>
         </div>
     </div>
-    {% for post in issue.published_posts|sort(attribute='published_at') %}
+    {% for post in issue.published_posts()|sort(attribute='published_at') %}
         {% if not post.event %}
             {{ post_item(post) }}
         {% endif %}

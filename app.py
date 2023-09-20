@@ -1,8 +1,8 @@
 import config
 import sentry_sdk
 from pinko import routes
-from taozi import create_app
-from flask_konbini import Konbini
+from pinko.taozi_local.taozi import create_app
+from pinko.konbini.flask_konbini import Konbini
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 app = create_app(config, name='pinko', blueprints=[routes])
@@ -15,4 +15,4 @@ if not app.debug:
     )
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000, debug=True)

@@ -1,37 +1,76 @@
-{% macro post_item(post) -%}
-<div class="post-item">
-    <div class="post-item--image">
-        <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
+{% macro post_item(post, card_type) -%}
+  {% if post.print_only %}
+    {% set url = post.issue.store_url %}
+  {% else %}
+    {% set url = url_for('pinko.post', issue=post.issue.slug, slug=post.slug) %}
+  {% endif %}
+  <a href="{{ url }}" class="card" draggable="false">
+    <div style="background-image:url({{post.image.path}})" class="card--img {{card_type}}" >
+    {% if post.print_only %}
+      <div class="print-only">Print Only</div>
+    {% endif %}
     </div>
-    <div class="post-item--body">
-        {% if post.print_only %}
-            <div class="print-only">Print Only</div>
-            {% set url = post.issue.store_url %}
-        {% else %}
-            {% set url = url_for('pinko.post', issue=post.issue.slug, slug=post.slug) %}
-        {% endif %}
-        <h1><a href="{{ url }}">{{ post.title }}</a></h1>
-        <div class="post-item--meta">
-            <span>{{ post.published_at.strftime('%B %-d, %Y') }}</span> &bull;
-            <span>{{ post.issue.name }}</span>
-        </div>
-        <p>{{ post.desc }}</p>
-        {% set byline = post.authors|join(', ', 'name') %}
-        {% if byline != 'Pinko' %}
-            <div class="post-item--authors">by {{ post.authors|join(', ', 'name') }}</div>
-        {% endif %}
+    <div class="card--meta">
+        <span>{{ post.published_at.strftime('%^B %-d, %Y') }}</span> &bull;
+        <span>{{ post.issue.name.upper() }}</span>
     </div>
-</div>
+    <div class="card--title">{{ post.title }}</div>
+    <div class="card--desc">{{ post.desc }}</div>
+    {% set byline = post.authors|join(', ', 'name') %}
+    {% if byline != 'Pinko' %}
+        <div class="card--authors">by {{ post.authors|join(', ', 'name') }}</div>
+    {% endif %}
+</a>
 {%- endmacro %}
 
 {% macro issue_item(name, url, color, cover_url) -%}
-    <div class="issue-item">
-        <a href="{{ url }}">
-            <div class="issue-item--cover" style="{% if cover_url %}background-image:url({{cover_url}});{% else %}background:{{color}};{% endif %}">
-                {% if not cover_url %}
-                    <h1>{{ name }}</h1>
-                {% endif %}
-            </div>
-        </a>
-    </div>
+    <a href="{{ url }}" class="card" draggable="false">
+      <div style="{% if cover_url %}background-image:url({{cover_url}});{% else %}background:{{color}};{% endif %}" class="card--img card-b" ></div>
+      <div style="font-size: .75em;">{{ name }}</div>
+    </a>
+{%- endmacro %}
+
+
+{% macro pagination(paginator, route) -%}
+  <div class="pagination" style="display:flex">
+    {% if paginator.has_prev %}
+        <a class="prev_page" rel="prev" href="{{ url_for(route, page=paginator.prev_num) }}">‹ ‹ Back</a>
+        {%if paginator.prev_num != 1 %}
+          <div style="margin-left:auto;">...</div>
+        {% else %}
+          <div style="margin-left:auto;visibility:hidden;">...</div>
+        {% endif %}
+    {% else %}
+        <div style="visibility:hidden;">‹ ‹ Back</div>
+        <div style="margin-left:auto;visibility:hidden;">...</div>
+    {% endif %}
+
+    {% if paginator.page == 1%}
+      {% set pages = range(1,4) if paginator.pages > 3 else range(1, paginator.pages+1) %}
+    {% elif paginator.page == paginator.pages %}
+      {% set pages = range(paginator.pages-2, paginator.pages+1) if paginator.pages > 3 else range(1, paginator.pages+1) %}
+    {% else %}
+      {% set pages = range(paginator.page-1,paginator.page+2) %}
+    {% endif %}
+
+    {% for page in pages %}
+        {% if page == paginator.page %}
+            <em class="current">{{ page }}</em>
+        {% else %}
+            <a href="{{ url_for(route, page=page) }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if paginator.has_next %}
+        {%if paginator.next_num != paginator.pages %}
+          <div style="margin-right:auto">...</div>
+        {% else %}
+          <div style="margin-right:auto;visibility:hidden;">...</div>
+        {% endif %}
+        <a class="next_page" rel="next" href="{{ url_for(route, page=paginator.next_num) }}">Next › ›</a>
+    {% else %}
+        <div style="margin-right:auto;visibility:hidden;">...</div>
+        <div style="visibility:hidden;">>Next › ›</div>
+    {% endif %}
+  </div>
 {%- endmacro %}

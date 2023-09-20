@@ -24,8 +24,8 @@ html, body {
 }
 </style>
 <article>
-    <img src="{{ post.image.path }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
-    <header>
+    <div style="background-image:url({{post.image.path}});transform: rotate({{range(-6, 0)|random}}deg);" class="post--image" ></div>
+    <div>
         {% if not post.event %}
             <div class="post--issue-meta">{{ post.published_at.strftime('%B %-d, %Y') }} &bull; {{ post.issue.name }}</div>
         {% endif %}
@@ -41,10 +41,9 @@ html, body {
                 {% endif %}
             {% endif %}
         </div>
-    </header>
+    </div>
     <div>
         {{ post.html|safe }}
     </div>
 </article>
 {% endblock %}
-
