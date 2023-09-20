@@ -33,10 +33,10 @@
     {% include "_messages.html" %}
 
     <header>
-      <a id="brand" href="{{ url_for('pinko.index') }}">
-        <img src="{{ url_for('static', filename='Pinko.svg') }}">
-      </a>
       <nav>
+        <a id="brand" href="{{ url_for('pinko.index') }}">
+          <img src="{{ url_for('static', filename='Pinko.svg') }}">
+        </a>
         <div class="nav-primary">
           <a class="{{ 'nav-current' if 'shop' in request.endpoint else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
           <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
@@ -54,6 +54,18 @@
           <!-- TODO: IMPLEMENT DONATE PAGE -->
           {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
           <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
+        </div>
+        <div class="search-mobile">
+            <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
+          </div>
+        <div class="nav-mobile">
+          <button class="dropbtn" onclick="myFunction()">☰
+          </button>
+          <div class="dropdown-content" id="myDropdown">
+            <a class="{{ 'nav-current' if 'shop' in request.endpoint else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
+            <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
+            <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
+            <a class="{{ 'nav-current' if 'donate' in request.endpoint else '' }}" href="{{ url_for('pinko.donate') }}">Support</a>
         </div>
 
       </nav>
@@ -101,6 +113,22 @@
         popup.style.display = "none";
       };
       closeButton.addEventListener("click", closePopup, false);
+
+      /* When the user clicks on the button,
+      toggle between hiding and showing the dropdown content */
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(e) {
+        if (!e.target.matches('.dropbtn')) {
+        var myDropdown = document.getElementById("myDropdown");
+          if (myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+          }
+        }
+      }
     </script>
 </body>
 </html>

@@ -215,24 +215,29 @@ nav {
   font-size: 24px;
   margin: auto 0;
   display: flex;
-  justify-content: space-between;
-  position: relative;
+  position: fixed;
+  width: 100vw;
   z-index: 10;
 }
 .nav-primary {
+  margin-left:auto;
+  display: flex;
 }
 .nav-primary a {
-  margin-right: 1.5em;
+  margin: auto 1.5em auto 0
 }
 .nav-secondary {
+  margin: 0 40px 0 auto;
+  display: flex;
 }
 .nav-secondary a {
-  margin-left: 1.5em;
+  margin: auto 0 auto 1.5em
 }
 nav .nav-current {
   text-decoration: underline;
 }
 nav .search {
+  margin: auto 0;
   width: 15vw;
   display: inline-block;
 }
@@ -949,115 +954,67 @@ a.go-checkout:hover {
   border: 2px solid #FF99F4;
 }
 
-@media only screen and (max-width: 1080px) {
-  .brand {
-    display: none;
-  }
-
-  .product {
-    display: block;
-  }
-  .product--info {
-    min-width: none;
-  }
-  .product--info h1 {
-    margin-top: 0;
-    padding: 0;
-  }
-
-  .sku > div {
-    flex: 0.5;
-  }
+.nav-mobile {
+  margin: auto 20px auto auto;
+  overflow: hidden;
+  display:none;
+}
+.nav-mobile .dropbtn {
+  background: none;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
-#faq ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 2px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:active {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.search-mobile {
+  margin: auto;
+  display: none;
 }
 
 @media only screen and (max-width: 760px) {
   nav {
-    flex-direction: column;
   }
-  nav > div {
-    display: flex;
-    justify-content: space-between;
+  #brand img {
+    width: 60%;
   }
   .nav-primary {
-    margin-bottom: 0.5em;
-  }
-  .nav-primary a, .nav-secondary a {
-    margin: 0;
-  }
-  #about {
-    display: block;
-  }
-  #masthead {
-    padding: 2em 1.5em;
-  }
-  #home {
-    display: block;
-    text-align: center;
-  }
-  #home > a {
-    display: inline-block;
-    max-width: 100%;
-    width: 320px;
-    min-width: 280px;
-    font-size: 1.5em;
-  }
-}
-
-@media only screen and (max-width: 640px) {
-  .issue--header {
-    display: block;
-  }
-  .issue--header .issue-item {
-    margin: 2em auto;
-  }
-  .issue--intro h1 {
-    text-align: center;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .post-item--image {
     display: none;
   }
-
-  .search {
-    width: 100%;
-    margin-bottom: 0.5em;
-  }
   .nav-secondary {
-    flex-wrap: wrap;
+    display:none;
   }
-  .search form {
-    display: flex;
+  .nav-mobile {
+    display:block;
   }
-  .search input[type=text] {
-    flex: 1;
-  }
-
-  .store-item, .event-item {
-    display: block;
-  }
-  .store-item img, .event-item img {
-    max-width: 100%;
-  }
-
-  .most-recent-issue {
-    height: auto;
-  }
-  .most-recent-issue--post {
-    position: static;
-    margin-bottom: 1em;
-    width: 100%;
-    height: auto;
-  }
-
-  footer {
+  .search-mobile {
     display: block;
   }
 }
