@@ -38,7 +38,7 @@
           <img src="{{ url_for('static', filename='Pinko.svg') }}">
         </a>
         <div class="nav-primary desktop">
-          <a class="{{ 'nav-current' if 'shop' in request.endpoint else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
+          <a class="{{ 'nav-current' if ('shop' in request.endpoint and 'cart' not in request.endpoint) else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
           <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
           <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
         </div>

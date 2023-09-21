@@ -995,8 +995,7 @@ a.go-checkout:hover {
 .writing-header {
   display:flex
 }
-
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 900px) {
   main {
     display: block;
   }
@@ -1010,16 +1009,6 @@ a.go-checkout:hover {
   }
   #home--new {
     margin: 0;
-  }
-  #home--new--banner {
-    background-size: cover;
-    height: 490px;
-  }
-  .mobile {
-    display: flex !important;
-  }
-  .desktop {
-    display: none !important;
   }
   #footer {
     margin: 0;
@@ -1048,12 +1037,6 @@ a.go-checkout:hover {
     font-size: 1.5em;
     font-weight:bold;
   }
-  #home--purchase {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-  #purchase--grid {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
   .product {
     display: block;
   }
@@ -1071,10 +1054,6 @@ a.go-checkout:hover {
   }
   .product--description h1 {
     text-align: center;
-  }
-  #product--purchase {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    grid-row-gap: 40px;
   }
   #about--shape {
     width: 60%;
@@ -1097,11 +1076,6 @@ a.go-checkout:hover {
     display: flex;
     width: 100%;
   }
-  #writing--grid {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    grid-row-gap: 40px;
-    padding: 0 20px;
-  }
   .issue--header {
     display: block;
   }
@@ -1115,13 +1089,57 @@ a.go-checkout:hover {
     padding-right: 0;
     margin: 0 auto;
   }
-  #issue--grid {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+  #writing--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-row-gap: 40px;
     padding: 0 20px;
   }
+  #issue--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-row-gap: 40px;
+    padding: 0 20px;
+  }
+  #product--purchase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-row-gap: 40px;
+  }
+  #home--purchase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #purchase--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   article {
     padding: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .mobile {
+    display: flex !important;
+  }
+  .desktop {
+    display: none !important;
+  }
+  #home--new--banner {
+    background-size: cover;
+    height: 490px;
+  }
+  #issue--grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  #writing--grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  #home--purchase {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  #purchase--grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  #product--purchase {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-row-gap: 40px;
   }
 }
 
