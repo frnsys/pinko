@@ -20,7 +20,7 @@
     <div class="product--info">
       <div class="product--description">
         <h1>{{ product.name }}</h1>
-        <p>{{ product.description|safe }}</p>
+        <p class="desktop">{{ product.description|safe }}</p>
 
         <div class="product--price">
             {% if not product.default_price %}
@@ -33,6 +33,7 @@
                 </form>
             {% endif %}
         </div>
+        <p class="mobile">{{ product.description|safe }}</p>
       </div>
       <div class="product--additional">
         <h2>You might Also like...</h2>

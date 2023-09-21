@@ -37,12 +37,12 @@
         <a id="brand" href="{{ url_for('pinko.index') }}">
           <img src="{{ url_for('static', filename='Pinko.svg') }}">
         </a>
-        <div class="nav-primary">
+        <div class="nav-primary desktop">
           <a class="{{ 'nav-current' if 'shop' in request.endpoint else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
           <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
           <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
         </div>
-        <div class="nav-secondary">
+        <div class="nav-secondary desktop">
           <div class="search">
               <form action="{{ url_for('pinko.search') }}" role="search">
                   <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
@@ -55,10 +55,10 @@
           {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
           <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
         </div>
-        <div class="search-mobile">
+        <div class="search-mobile mobile">
             <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
           </div>
-        <div class="nav-mobile">
+        <div class="nav-mobile mobile">
           <button class="dropbtn" onclick="myFunction()">☰
           </button>
           <div class="dropdown-content" id="myDropdown">
@@ -74,7 +74,7 @@
     <main>
         {% if 'shop' in request.endpoint and 'product' not in request.endpoint %}
           <img id="squiggle" src="{{ url_for('static', filename='pink-squiggle.svg') }}" />
-        {% elif 'product' not in request.endpoint and 'issue' not in request.endpoint and 'post' not in request.endpoint %}
+        {% elif 'product' not in request.endpoint and ('issue' not in request.endpoint or 'issues' in request.endpoint) and 'post' not in request.endpoint %}
           <img id="squiggle" src="{{ url_for('static', filename='squiggle.svg') }}" />
         {% endif %}
         <div class="content">
@@ -82,14 +82,16 @@
             {% endblock %}
         </div>
         <footer id="footer">
-          <div id='footer_links'>
-            <a href="{{ url_for('shop.index') }}">Purchase</a>
-            <a href="{{ url_for('pinko.about') }}">About</a>
-            <a href="{{ url_for('pinko.donate') }}">Support</a>
-            <a href="{{ url_for('pinko.archive') }}">Writing</a>
-            <!-- TODO: IMPLEMENT CONTACT PAGE -->
+          <div id="footer-text">
+            <div id='footer_links'>
+              <a href="{{ url_for('shop.index') }}">Purchase</a>
+              <a href="{{ url_for('pinko.about') }}">About</a>
+              <a href="{{ url_for('pinko.donate') }}">Support</a>
+              <a href="{{ url_for('pinko.archive') }}">Writing</a>
+              <!-- TODO: IMPLEMENT CONTACT PAGE -->
+            </div>
+            <div id='communism_for_fags'>Communism for fags!</div>
           </div>
-          <div id='communism_for_fags'>Communism for fags!</div>
           {% include "_subscribe_form.html" %}
         </footer>
 

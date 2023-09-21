@@ -2,15 +2,20 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="stamp-header" style="display:flex">
-    <div id="writing--tabs">
+<div class="stamp-header writing-header">
+    <div id="writing--tabs" class="desktop">
       <a href="/in-print">In Print</a>
       <a href="/magazine" style="text-decoration: underline">Online</a>
     </div>
     <div class="stamp" style="margin:auto">
         <div>WRITING</div>
     </div>
-    <div style="width:30%"></div>
+    <div class="desktop" style="width:30%"></div>
+
+    <div id="writing--tabs" class="mobile">
+      <a href="/in-print">In Print</a>
+      <a href="/magazine" style="text-decoration: underline">Online</a>
+    </div>
 </div>
 <div id="writing--grid">
 {% for post in posts %}
