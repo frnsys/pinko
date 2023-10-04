@@ -123,6 +123,7 @@ section {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-column-gap: 30px;
+  grid-row-gap: 20px;
 }
 #squiggle {
   max-width: none;
@@ -161,7 +162,7 @@ section {
   padding: 0 60px 0 60px;
 }
 .pagination {
-  margin-top: 80px;
+  margin: 80px 10px 0 10px;
   font-size: 2em;
 }
 .pagination a div {
@@ -526,7 +527,7 @@ input[type=email]::placeholder {
   font-size: 28px;
   margin: 60px 20px 0 20px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-column-gap: 68px;
   grid-row-gap: 120px;
 }

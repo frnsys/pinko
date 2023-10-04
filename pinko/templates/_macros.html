@@ -1,6 +1,6 @@
 {% macro post_item(post, card_type) -%}
   {% if post.print_only %}
-    {% set url = post.issue.store_url %}
+    {% set url = "" %}
   {% else %}
     {% set url = url_for('pinko.post', issue=post.issue.slug, slug=post.slug) %}
   {% endif %}
@@ -30,6 +30,26 @@
     </a>
 {%- endmacro %}
 
+{% macro toc_item(post, color) -%}
+  {% if post.print_only %}
+    {% set url = "" %}
+  {% else %}
+    {% set url = url_for('pinko.post', issue=post.issue.slug, slug=post.slug) %}
+  {% endif %}
+  <a style="background:{{color}}; padding: 10px; width: 75%;" href="{{ url }}" class="card--img card" draggable="false">
+    <div class="card--meta" style="color: black;">
+        <span>{{ post.published_at.strftime('%^B %-d, %Y') }}</span> &bull;
+        <span>{{ post.issue.name.upper() }}</span>
+    </div>
+    <div class="card--title">{{ post.title }}</div>
+    <div class="card--desc">{{ post.desc }}</div>
+    {% set byline = post.authors|join(', ', 'name') %}
+    {% if byline != 'Pinko' %}
+        <div class="card--authors">by {{ post.authors|join(', ', 'name') }}</div>
+    {% endif %}
+  </a>
+{%- endmacro %}
+
 
 {% macro pagination(paginator, route) -%}
   <div class="pagination" style="display:flex">
@@ -55,9 +75,9 @@
 
     {% for page in pages %}
         {% if page == paginator.page %}
-            <em class="current">{{ page }}</em>
+            <em style="margin: 0 .2em 0 .2em" class="current">{{ page }}</em>
         {% else %}
-            <a href="{{ url_for(route, page=page) }}">{{ page }}</a>
+            <a style="margin: 0 .2em 0 .2em" href="{{ url_for(route, page=page) }}">{{ page }}</a>
         {% endif %}
     {% endfor %}
 

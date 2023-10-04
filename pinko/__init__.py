@@ -1,5 +1,6 @@
 import config
 from random import sample
+import json
 from flask_security import current_user
 from .taozi_local.taozi.models import Post, Event, Issue, Meta
 from .konbini.konbini.forms import AddToCartForm
@@ -48,7 +49,7 @@ def issue(slug):
     issue = Issue.query.filter(Issue.slug==slug).first_or_404()
     if not issue.published and not current_user.is_authenticated:
         abort(404)
-    product_id = issue.__getitem__('product_id')
+    product_id = issue['product_id']
     product = get_product(product_id) if product_id else ''
 
     form = AddToCartForm(name=product.name, sku=product.default_price.id, product=product.id)
@@ -61,9 +62,8 @@ def archive():
     data = request.args
     page = int(data.get('page', 1))
 
-    # TODO: add print_only back
-    # posts = Post.query.filter(Post.published, Post.print_only==False Post.event==None).all()
-    posts = Post.query.filter(Post.published, Post.event==None).paginate(page, per_page=6)
+    print_only = json.dumps({'print_only': False})
+    posts = Post.query.filter(Post.published, Post.meta==print_only, Post.event==None).paginate(page, per_page=2)
     return render_template('writing.html', posts=posts.items, paginator=posts)
 
 @routes.route('/in-print')

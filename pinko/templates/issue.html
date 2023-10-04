@@ -1,4 +1,4 @@
-{% from "_macros.html" import issue_item, post_item  %}
+{% from "_macros.html" import toc_item  %}
 {% extends 'layout.html' %}
 
 {% block content %}
@@ -15,9 +15,9 @@ html, body {
         <div class="issue--shop" style="display:flex">
             <div>{{'${:,.2f}'.format(product.default_price.unit_amount/100)}}</div>
 
-            <form action="{{ url_for('shop.cart') }}" method='POST'>
+            <form class="product" action="{{ url_for('shop.cart') }}" method='POST'>
                 {{ form.hidden_tag() }}
-                <input type="submit" value='Add to Cart'>
+                <input style="margin-left:auto;" type="submit" value='Add to Cart'>
             </form>
         </div>
     </div>
@@ -25,7 +25,7 @@ html, body {
 <div id="issue--grid">
 {% for post in issue.published_posts()|sort(attribute='published_at') %}
     {% if not post.event %}
-        {{ post_item(post, 'card-b') }}
+        {{ toc_item(post, issue['toc_color'] ) }}
     {% endif %}
 {% endfor %}
 </div>
