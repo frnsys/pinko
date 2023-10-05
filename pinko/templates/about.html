@@ -2,34 +2,30 @@
 
 {% block content %}
 <style>
-    html, body {
+    html {
         background-color: #FF99F4;
+    }
+    body {
+        background: none;
     }
 </style>
 <div id="about">
-    <div id="manifesto">
-        <p><a href="{{ url_for('static', filename='pinko.pdf') }}">Like the world which it served to bind together, heterosexuality is in crisis.</a> This is not for the first time, but it may be the last. This crisis is not a passing “sex panic,” but represents a more fundamental rupture. In the grim shadow of biosphere collapse and climate fascism, who could believe heterosexuality’s promises of eternity? No one can agree any longer on what this world is for.</p>
-
-        <p>The sexual or gender freedom we currently possess is nothing but the freedom to reproduce the current social order. The family and the workplace have undergone a profound transformation in the past 50 years, but the horizons which sexual liberationists were pursuing are now in some ways our ground. What we need most now is the courage to imagine new freedoms.</p>
-
-        <p>These freedoms will be discovered in the course of struggle. We don’t presume to dictate them in advance. But part of the work of that struggle will be the creation of new language and new concepts with which to grasp capitalist sexual and gender relations, and an audience of readers to use them. A magazine is a crucial tool in this regard. <a href="{{ url_for("pinko.subscribe") }}">Join us.</a></p>
+    <div id="about--shape">
+      <img id="about--oval" src="{{ url_for('static', filename='About.svg') }}" />
     </div>
     <div id="masthead">
+        <div class="stamp-header about-stamp">
+            <div class="stamp">
+                <div>ABOUT</div>
+            </div>
+        </div>
         <div>
-            <p>Pinko is a collective for thinking gay communism together. We publish a biannual print issue, periodic zines, and host irregular essays, translations and archival material on our website.</p>
-            <p>We don’t quite have the capacity to go through open submissions, but if you’d like to get in touch with us, please email <em><a href="mailto:commie@pinko.online">commie@pinko.online</a></em>.</p>
-            <p>If you have questions about subscriptions or billing, please email <em><a href="mailto:subs@pinko.online">subs@pinko.online</a></em>.</p>
-            <p>If you’d like to carry copies of Pinko in your bookstore, infoshop or library, or you want to make a donation, proposition or complaint, please email <em><a href="mailto:admin@pinko.online">admin@pinko.online</a></em>.</p>
+            {{about.html|safe}}
         </div>
         <div>
             <h2>Pinko Collective</h2>
             <ul>
-                <li>JB Brager</li>
-                <li>Lou Cornum</li>
-                <li>Max Fox</li>
-                <li>ME O’Brien</li>
-                <li>Francis Tseng</li>
-                <li>Addison Vawters</li>
+                {{collective.html|safe}}
             </ul>
 
             <hr />
@@ -37,8 +33,7 @@
             <p>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License</p>
 
             <ul>
-                <li>ISSN 2689-3142 (Print)</li>
-                <li>ISSN 2689-3150 (Online)</li>
+              {{issns.html|safe}}
             </ul>
         </div>
     </div>

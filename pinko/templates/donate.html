@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<style>
+    html {
+        background-color: #D8FFC2;
+    }
+    body {
+        background: none;
+    }
+</style>
+<div class="stamp-header">
+    <div class="stamp">
+        <div>Donate</div>
+    </div>
+</div>
+<div id="donate">
+    <div id="masthead">
+        <div>
+            {{donate.html|safe}}
+        </div>
+    </div>
+</div>
+{% endblock %}

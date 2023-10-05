@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="Description" CONTENT="TODO">
+  <title>pinko</title>
+  <link rel="stylesheet" href="https://use.typekit.net/aui1oow.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/16.png') }}" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/32.png') }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/96.png') }}" sizes="96x96" />
+
+  {% block meta %}
+      <meta property="og:site_name" content="pinko">
+      <meta property="og:type" content="website">
+      <meta property="og:description" content="A biannual print magazine of gay communism">
+      <meta property="og:title" content="pinko">
+      <meta property="og:image" content="/uploads/cop_car.png" />
+      <meta property="og:url" content="{{ request.url }}">
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="pinko">
+      <meta name="twitter:image" content="/uploads/cop_car.png" />
+      <meta name="twitter:image:alt" content="Burning cop car">
+      <meta name="twitter:description" content="A biannual print magazine of gay communism">
+      <meta name="twitter:creator" content="@pinkomagazine">
+      <meta name="twitter:site" content="@pinkomagazine">
+  {% endblock %}
+</head>
+
+<body class="{{ 'store' if 'shop' in request.endpoint else '' }}">
+    {% include "_messages.html" %}
+
+    <header>
+      <a id="brand" href="{{ url_for('pinko.index') }}">
+        <img src="{{ url_for('static', filename='Pinko.svg') }}">
+      </a>
+      <nav>
+        <div class="nav-primary">
+          <a class="{{ 'nav-current' if 'shop' in request.endpoint else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
+          <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
+          <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
+        </div>
+        <div class="nav-secondary">
+          <div class="search">
+              <form action="{{ url_for('pinko.search') }}" role="search">
+                  <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
+                  <input type="submit" value="Search" />
+                  <input hidden type="text" name="query" value="{{ query or '' }}" aria-label="Query"/>
+              </form>
+          </div>
+          <a class="{{ 'nav-current' if 'donate' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">Donate</a>
+          <!-- TODO: IMPLEMENT DONATE PAGE -->
+          {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
+          <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
+        </div>
+
+      </nav>
+    </header>
+
+    <main>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer id="footer">
+          <div id='footer_links'>
+            <a href="{{ url_for('shop.index') }}">Purchase</a>
+            <a href="{{ url_for('pinko.archive') }}">Writing</a>
+            <a href="{{ url_for('pinko.about') }}">Contact</a>
+            <!-- TODO: IMPLEMENT CONTACT PAGE -->
+            <a href="{{ url_for('pinko.about') }}">About</a>
+          </div>
+          <div id='communism_for_fags'>Communism for fags!</div>
+          {% include "_subscribe_form.html" %}
+        </footer>
+
+
+    </main>
+
+    {% if config.GA_ID %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.GA_ID }}"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ config.GA_ID }}');
+        </script>
+    {% endif %}
+    <script>
+    let cards = document.getElementsByClassName('card')
+    var cardInset = function(img) {
+      img.style.boxShadow = "inset 4px 4px #00000080"
+    };
+    var cardReset = function(img) {
+      img.style.boxShadow = "4px 4px 0px 0px #00000080";
+    }
+    for (var i = 0; i < cards.length; i++) {
+      let img = cards[i].firstElementChild;
+      cards[i].addEventListener("mousedown", () => { cardInset(img); }, false);
+      cards[i].addEventListener("mouseup",() => { cardReset(img); }, false);
+      cards[i].addEventListener("mouseout",() => { cardReset(img); }, false);
+    }
+    </script>
+</body>
+</html>

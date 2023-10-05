@@ -1,17 +1,18 @@
-{% macro store_item(p) -%}
-    <div class="store-item">
-        {% set url = url_for('shop.product', id=p.id[5:]) %}
-        <div class="store-item--image">
-            <a href="{{ url }}">
-                {% set image = p.images[0] if p.images else p.metadata.image %}
-                <img src="{{ image }}" alt="{{ p.name }}" title="{{ p.name }}" style="transform:rotate({{range(-6, 0)|random}}deg);" />
-            </a>
+{% macro store_item(p, card_type) -%}
+    {% set url = url_for('shop.product', id=p.id[5:]) %}
+    <a href="{{ url }}" class="card" draggable="false">
+        {% set image = p.images[0] if p.images else p.metadata.image %}
+        <div class="card--img {{card_type}}" style="background-image:url({{image}})" alt="{{ p.name }}" title="{{ p.name }}" ></div>
+        <div class="card--title">{{ p.name }}</div>
+        <div class="card--desc">
+          {{ (p.description or p.caption or p.metadata.caption)|safe }}
         </div>
-        <div class="store-item--body">
-            <h1><a href="{{ url }}">{{ p.name }}</a></h1>
-            <p>{{ (p.description or p.caption or p.metadata.caption)|safe }}</p>
-        </div>
-    </div>
+        {% if p.default_price %}
+          <div class="card--price">{{'${:,.2f}'.format(p.default_price.unit_amount/100)}}</div>
+        {% else %}
+          <div class="card--price">Sold Out</div>
+        {% endif %}
+    </a>
 {%- endmacro %}
 
 {% macro render_field_with_errors(field, hint, label=True) %}

@@ -2,21 +2,28 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="issues">
-{% for issue in issues|reverse %}
-    <div class="issue-with-caption">
-        {{ issue_item(issue.name, url_for('pinko.issue', slug=issue.slug), issue.color, issue.cover_url) }}
-        <p>{{ issue.caption }}</p>
+<div class="stamp-header writing-header">
+    <div id="writing--tabs" class="desktop">
+      <a href="/in-print" style="text-decoration: underline">In Print</a>
+      <a href="/magazine">Online</a>
     </div>
+    <div class="stamp" style="margin:auto">
+        <div>WRITING</div>
+    </div>
+    <div class="desktop" style="width:30%"></div>
+
+    <div id="writing--tabs" class="mobile">
+      <a href="/in-print" style="text-decoration: underline">In Print</a>
+      <a href="/magazine">Online</a>
+    </div>
+</div>
+
+<div id="writing--grid">
+{% for issue in issues|reverse %}
+        {{ issue_item(issue.name, url_for('pinko.issue', slug=issue.slug), issue.color, issue.cover_url) }}
 {% endfor %}
 {% for zine in zines|reverse %}
-    <div class="issue-with-caption">
         {{ issue_item(zine.name, url_for('shop.product', id=zine.id[5:]), '#aaaaaa', zine.images[0]) }}
-        <p>{{ zine.name }}</p>
-    </div>
 {% endfor %}
 </div>
 {% endblock %}
-
-
-

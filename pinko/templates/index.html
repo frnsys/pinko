@@ -1,32 +1,35 @@
 {% from "_macros.html" import post_item %}
+{% from "/shop/_macros.html" import store_item%}
 {% extends 'layout.html' %}
 
 {% block content %}
-<img id="squiggle" src="{{ url_for('static', filename='squiggle.svg') }}" />
 <div id="home">
-    <a href="{{ url_for('pinko.about') }}">
-        <div class="stamp">
-            <div>Pinko</div>
-            <div>Pinko</div>
-        </div>
-    </a>
-    <a href="{{ url_for('shop.index') }}" id="home--subscribe">
-        <div class="stamp">
-            <div>Store</div>
-            <div>Store</div>
-        </div>
-    </a>
-    <a href="{{ url_for('pinko.issues') }}" id="home--issues">
-        <div class="stamp">
-            <div>In Print</div>
-            <div>In Print</div>
-        </div>
-    </a>
-    <a href="{{ url_for('pinko.archive') }}" id="home--archive">
-        <div class="stamp">
-            <div>Magazine</div>
-            <div>Magazine</div>
-        </div>
-    </a>
+  <a href="{{banner['path'].text|safe}}" id="home--new">
+    <div id="home--new--banner" style="background-image:url({{banner['image'].text|safe}})"></div>
+    <div id="home--new--text">
+      <div id="home--new--header">New on Pinko: {{banner['name'].text|safe}}</div>
+      <div id="home--new--description">{{banner['description'].text|safe}}</div>
+    </div>
+  </a>
+
+  <div id="home--read--header">READ</div>
+  <div id="home--read">
+  {% for p in posts %}
+    {{ post_item(p, 'card-c') }}
+  {% endfor %}
+  </div>
+
+  <div id="home--purchase--header">SHOP PINKO MERCH</div>
+  <div id="home--purchase">
+    {% for p in products %}
+      {{ store_item(p, 'card-a') }}
+    {% endfor %}
+  </div>
+
+  <div id='subscribe-popup' style="display:{{popup}}">
+    <div id='subscribe-popup-close'><img src="{{url_for('static',filename='X.svg')}}"></div>
+    <div id="subscribe-popup-text">Sign up for our newsletter for updates on new releases, upcoming issues, and events in your area.</div>
+    {% include "_subscribe_form.html" %}
+  </div>
 </div>
 {% endblock %}

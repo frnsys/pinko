@@ -1,4 +1,4 @@
-{% from "_macros.html" import issue_item, post_item  %}
+{% from "_macros.html" import toc_item  %}
 {% extends 'layout.html' %}
 
 {% block content %}
@@ -7,18 +7,26 @@ html, body {
     background-color: {{ issue.background_color }}
 }
 </style>
-<div class="issue">
-    <div class="issue--header">
-        {{ issue_item('Pinko ' + issue.id|string, url_for('pinko.issue', slug=issue.slug), issue.color, issue.cover_url) }}
-        <div class="issue--intro">
-            <h1>{{ issue.name }}</h1>
-            <p>{{ issue.description|safe }}</p>
+<div class="issue--header">
+    <div style="{% if issue.cover_url %}background-image:url({{issue.cover_url}});{% else %}background:{{issue.color}};{% endif %}" class="issue-item--cover" ></div>
+    <div class="issue--intro">
+        <h1>{{ issue.name }}</h1>
+        <p>{{ issue.description|safe }}</p>
+        <div class="issue--shop" style="display:flex">
+            <div>{{'${:,.2f}'.format(product.default_price.unit_amount/100)}}</div>
+
+            <form class="product" action="{{ url_for('shop.cart') }}" method='POST'>
+                {{ form.hidden_tag() }}
+                <input style="margin-left:auto;" type="submit" value='Add to Cart'>
+            </form>
         </div>
     </div>
-    {% for post in issue.published_posts|sort(attribute='published_at') %}
-        {% if not post.event %}
-            {{ post_item(post) }}
-        {% endif %}
-    {% endfor %}
+</div>
+<div id="issue--grid">
+{% for post in issue.published_posts()|sort(attribute='published_at') %}
+    {% if not post.event %}
+        {{ toc_item(post, issue['toc_color'] ) }}
+    {% endif %}
+{% endfor %}
 </div>
 {% endblock %}
