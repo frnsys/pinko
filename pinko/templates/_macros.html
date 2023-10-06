@@ -37,6 +37,9 @@
     {% set url = url_for('pinko.post', issue=post.issue.slug, slug=post.slug) %}
   {% endif %}
   <a style="background:{{color}}; padding: 10px; width: 75%;" href="{{ url }}" class="card--img card" draggable="false">
+    {% if post.print_only %}
+      <div class="print-only">Print Only</div>
+    {% endif %}
     <div class="card--meta" style="color: black;">
         <span>{{ post.published_at.strftime('%^B %-d, %Y') }}</span> &bull;
         <span>{{ post.issue.name.upper() }}</span>
