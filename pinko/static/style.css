@@ -1122,6 +1122,15 @@ a.go-checkout:hover {
   .desktop {
     display: none !important;
   }
+  #subscribe-popup-text {
+    font-size: 1em;
+  }
+  #subscribe-popup #mc_embed_signup {
+    font-size: 1em;
+  }
+  #subscribe-popup #mc_embed_signup input::placeholder {
+    font-size: 1em;
+  }
   #home--new--banner {
     background-size: cover;
     height: 490px;
