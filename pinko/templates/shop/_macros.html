@@ -1,5 +1,5 @@
 {% macro store_item(p, card_type) -%}
-    {% set url = url_for('shop.product', id=p.id[5:]) %}
+    {% set url = url_for('pinko.product', id=p.id[5:]) %}
     <a href="{{ url }}" class="card" draggable="false">
         {% set image = p.images[0] if p.images else p.metadata.image %}
         <div class="card--img {{card_type}}" style="background-image:url({{image}})" alt="{{ p.name }}" title="{{ p.name }}" ></div>

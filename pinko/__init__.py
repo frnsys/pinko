@@ -24,7 +24,7 @@ def index():
 
     posts = Post.query.filter(Post.published).limit(2)
 
-    products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PRODUCT_ID]
+    products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PLAN_ID]
     products = products[0:4]
 
     popup = 'none' if ('popup' in request.cookies) else ''
