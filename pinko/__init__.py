@@ -63,7 +63,7 @@ def archive():
     page = int(data.get('page', 1))
 
     print_only = json.dumps({'print_only': False})
-    posts = Post.query.filter(Post.published, Post.meta==print_only, Post.event==None).paginate(page, per_page=2)
+    posts = Post.query.filter(Post.published, Post.meta==print_only, Post.event==None).paginate(page, per_page=6)
     return render_template('writing.html', posts=posts.items, paginator=posts)
 
 @routes.route('/in-print')
@@ -105,6 +105,7 @@ def donate():
 def product(id):
     p = get_product(id)
     also = get_products()
-    also.remove(p)
+    if p in also:
+        also.remove(p)
     form = AddToCartForm(name=p.name, sku=p.default_price.id, product=p.id) if p.default_price else ''
     return render_template('shop/product.html', product=p, form=form, also=sample(also,2))
