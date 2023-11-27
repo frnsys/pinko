@@ -22,7 +22,8 @@ def index():
     'image': Meta.get_by_slug('banner-image-url'),
     'path': Meta.get_by_slug('banner-url')}
 
-    posts = Post.query.filter(Post.published).limit(2)
+    print_only = json.dumps({'print_only': False})
+    posts = Post.query.filter(Post.published, Post.event_id==None, Post.meta==print_only).limit(2)
 
     products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PLAN_ID]
     products = products[0:4]

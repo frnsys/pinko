@@ -50,8 +50,7 @@
                   <input hidden type="text" name="query" value="{{ query or '' }}" aria-label="Query"/>
               </form>
           </div>
-          <a class="{{ 'nav-current' if 'donate' in request.endpoint else '' }}" href="{{ url_for('pinko.donate') }}">Donate</a>
-          <!-- TODO: IMPLEMENT DONATE PAGE -->
+          <a href="https://fundraising.fracturedatlas.org/pinko-magazine">Donate</a>
           {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
           <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
         </div>
@@ -65,7 +64,7 @@
             <a class="{{ 'nav-current' if 'shop' in request.endpoint else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
             <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
             <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
-            <a class="{{ 'nav-current' if 'donate' in request.endpoint else '' }}" href="{{ url_for('pinko.donate') }}">Support</a>
+            <a href="https://fundraising.fracturedatlas.org/pinko-magazine">Support</a>
         </div>
 
       </nav>
@@ -75,7 +74,7 @@
         {% if 'shop' in request.endpoint and 'product' not in request.endpoint %}
           <img id="squiggle" src="{{ url_for('static', filename='pink-squiggle.svg') }}" />
         {% elif 'product' not in request.endpoint and ('issue' not in request.endpoint or 'issues' in request.endpoint) and 'post' not in request.endpoint %}
-          <img id="squiggle" src="{{ url_for('static', filename='squiggle.svg') }}" />
+          <img id="squiggle" src="{{ url_for('static', filename='purple-squiggle.svg') }}" />
         {% endif %}
         <div class="content">
             {% block content %}
