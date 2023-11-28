@@ -42,6 +42,8 @@
           <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
           <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
         </div>
+
+        {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
         <div class="nav-secondary desktop">
           <div class="search">
               <form action="{{ url_for('pinko.search') }}" role="search">
@@ -51,12 +53,14 @@
               </form>
           </div>
           <a href="https://fundraising.fracturedatlas.org/pinko-magazine">Donate</a>
-          {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
           <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
         </div>
         <div class="search-mobile mobile">
             <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
-          </div>
+        </div>
+        <div class="cart-mobile mobile">
+          <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
+        </div>
         <div class="nav-mobile mobile">
           <button class="dropbtn" onclick="myFunction()">☰
           </button>
