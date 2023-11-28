@@ -37,7 +37,7 @@ def index():
                               Post.meta==print_only,
                               Post.slug!=banner_post_slug).limit(3)
 
-    products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PRODUCT_ID]
+    products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PLAN_ID]
     products = products[0:4]
 
     popup = 'none' if ('popup' in request.cookies) else ''
@@ -118,6 +118,7 @@ def donate():
 def product(id):
     p = get_product(id)
     also = get_products()
-    also.remove(p)
+    if p in also:
+        also.remove(p)
     form = AddToCartForm(name=p.name, sku=p.default_price.id, product=p.id) if p.default_price else ''
     return render_template('shop/product.html', product=p, form=form, also=sample(also,2))
