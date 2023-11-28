@@ -102,9 +102,9 @@ section {
 #home--read {
   font-size: 40px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-column-gap: 90px;
-  padding: 0 60px 0 60px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column-gap: 20px;
+  padding: 0 10px;
 }
 #home--purchase--header {
   font-size: 40px;
@@ -184,7 +184,6 @@ img {
 }
 
 main {
-  overflow: scroll;
   max-width: 1280px;
   min-height: 100vh;
   margin: 0 auto;
@@ -976,6 +975,9 @@ a.go-checkout:hover {
 .search-mobile {
   margin: auto;
 }
+.cart-mobile{
+  margin: auto;
+}
 #footer-text {
   display: flex;
   width: 50vw;
@@ -1010,8 +1012,8 @@ a.go-checkout:hover {
     margin: auto 0 0 auto;
   }
   #footer-text {
-    width:100vw;
-    margin: 10px 0 10px 0;
+    width:95vw;
+    margin: 10px auto;
   }
   #subscribe {
     display: none;
@@ -1020,10 +1022,11 @@ a.go-checkout:hover {
     display: block;
   }
   #home--read {
-    display: none;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   #home--read--header {
-    display: none;
+    font-size: 1.5em;
+    font-weight:bold;
   }
   #home--purchase--header {
     font-size: 1.5em;

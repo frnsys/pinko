@@ -17,13 +17,24 @@ def intro():
 @routes.route('/')
 def index():
 
-    banner = {'name': Meta.get_by_slug('banner-title'),
-    'description': Meta.get_by_slug('banner-description'),
-    'image': Meta.get_by_slug('banner-image-url'),
-    'path': Meta.get_by_slug('banner-url')}
+    banner_post_slug = Meta.get_by_slug('banner-post-slug').text
+    if banner_post_slug!='0':
+        banner_post = Post.get_by_slug(banner_post_slug)
+        banner = {'name': banner_post.title,
+        'description': banner_post.desc,
+        'image': banner_post.image.url,
+        'path': url_for('pinko.post', issue=banner_post.issue.slug, slug=banner_post.slug) }
+    else:
+        banner = {'name': Meta.get_by_slug('banner-title').text,
+        'description': Meta.get_by_slug('banner-description').text,
+        'image': Meta.get_by_slug('banner-image-url').text,
+        'path': Meta.get_by_slug('banner-url').text}
 
     print_only = json.dumps({'print_only': False})
-    posts = Post.query.filter(Post.published, Post.event_id==None, Post.meta==print_only).limit(2)
+    posts = Post.query.filter(Post.published,
+                              Post.event_id==None,
+                              Post.meta==print_only,
+                              Post.slug!=banner_post_slug).limit(3)
 
     products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PLAN_ID]
     products = products[0:4]
