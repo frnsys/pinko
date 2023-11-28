@@ -2,7 +2,6 @@ import config
 from random import sample
 import json
 from flask_security import current_user
-
 from taozi.models import Post, Event, Issue, Meta
 from konbini.forms import AddToCartForm
 from taozi.compile import compile_markdown
@@ -19,7 +18,7 @@ def intro():
 def index():
 
     banner_post_slug = Meta.get_by_slug('banner-post-slug').text
-    if banner_post_slug:
+    if banner_post_slug!='0':
         banner_post = Post.get_by_slug(banner_post_slug)
         banner = {'name': banner_post.title,
         'description': banner_post.desc,
