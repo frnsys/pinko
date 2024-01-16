@@ -27,7 +27,10 @@
                 <div>Not currently available.</div>
             {% else %}
                 <form style="display:flex" action='{{ url_for('shop.cart') }}' method='POST'>
-                    {{form.hidden_tag()}}
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="name" value="{{ product.name }}">
+                    <input type="hidden" name="sku" value="{{ product.default_price.id }}">
+                    <input type="hidden" name="product" value="{{ product.id }}">
                     <div class="sku--price">{{ '${:,.2f}'.format(product.default_price.unit_amount/100) }}</div>
                     <input style="margin-left:auto" type="submit" value='Add to Cart'>
                 </form>
