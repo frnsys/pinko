@@ -34,7 +34,7 @@ def index():
     posts = Post.query.filter(Post.published,
                               Post.event_id==None,
                               Post.meta==print_only,
-                              Post.slug!=banner_post_slug).limit(3)
+                              Post.slug!=banner_post_slug).limit(9)
 
     products = [p for p in get_products() if p.id != "prod_" + config.SUBSCRIPTION_PLAN_ID]
     products = products[0:4]

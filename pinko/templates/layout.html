@@ -38,25 +38,26 @@
           <img src="{{ url_for('static', filename='Pinko.svg') }}">
         </a>
         <div class="nav-primary desktop">
-          <a class="{{ 'nav-current' if ('shop' in request.endpoint and 'cart' not in request.endpoint) else '' }}" href="{{ url_for('shop.index') }}">Purchase</a>
-          <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Writing</a>
+          <a class="{{ 'nav-current' if ('shop' in request.endpoint and 'cart' not in request.endpoint) else '' }}" href="{{ url_for('shop.index') }}">Store</a>
+          <a class="{{ 'nav-current' if 'in-print' in request.endpoint else '' }}" href="{{ url_for('pinko.issues') }}">Issues</a>
+          <a class="{{ 'nav-current' if 'magazine' in request.endpoint else '' }}" href="{{ url_for('pinko.archive') }}">Online</a>
           <a class="{{ 'nav-current' if 'about' in request.endpoint else '' }}" href="{{ url_for('pinko.about') }}">About</a>
         </div>
 
         {% set cart_img = 'cart-full.png' if session.get('cart', {}) else 'cart-empty.png' %}
         <div class="nav-secondary desktop">
           <div class="search">
-              <form action="{{ url_for('pinko.search') }}" role="search">
+              <!-- <form action="{{ url_for('pinko.search') }}" role="search">
                   <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
                   <input type="submit" value="Search" />
                   <input hidden type="text" name="query" value="{{ query or '' }}" aria-label="Query"/>
-              </form>
+              </form> -->
           </div>
-          <a href="https://fundraising.fracturedatlas.org/pinko-magazine">Donate</a>
+          <a href="https://fundraising.fracturedatlas.org/pinko-magazine">Support</a>
           <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
         </div>
         <div class="search-mobile mobile">
-            <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}">
+            <!-- <img alt="Search" src="{{ url_for('static', filename='Union.svg') }}"> -->
         </div>
         <div class="cart-mobile mobile">
           <a class="store--subnav" href="{{ url_for('shop.cart') }}"><img alt="Cart" src="{{ url_for('static', filename=cart_img) }}"></a>
@@ -90,7 +91,8 @@
               <a href="{{ url_for('shop.index') }}">Purchase</a>
               <a href="{{ url_for('pinko.about') }}">About</a>
               <a href="{{ url_for('pinko.donate') }}">Support</a>
-              <a href="{{ url_for('pinko.archive') }}">Writing</a>
+              <a href="{{ url_for('pinko.archive') }}">Online</a>
+              <a href="{{ url_for('pinko.issues') }}">Issues</a>
               <!-- TODO: IMPLEMENT CONTACT PAGE -->
             </div>
             <div id='communism_for_fags'>Communism for fags!</div>

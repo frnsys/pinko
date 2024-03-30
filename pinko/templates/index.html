@@ -12,14 +12,14 @@
     </div>
   </a>
 
-  <div id="home--read--header">READ</div>
+  <br/>
   <div id="home--read">
   {% for p in posts %}
-    {{ post_item(p, 'card-c') }}
+    {{ post_item(p, 'card-b') }}
   {% endfor %}
   </div>
 
-  <div id="home--purchase--header">SHOP PINKO MERCH</div>
+  <div id="home--purchase--header">STORE</div>
   <div id="home--purchase">
     {% for p in products %}
       {{ store_item(p, 'card-a') }}
