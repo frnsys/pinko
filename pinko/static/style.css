@@ -74,6 +74,7 @@ section {
 }
 #home--new:hover {
   transform: scale(1.01);
+  font-style: normal;
 }
 #home--new--banner {
   height: 400px;
@@ -84,8 +85,8 @@ section {
   padding: 0px 16px 0px 16px;
 }
 #home--new--header {
-  font-size: 36px;
-  color: #C1272D;
+  font-size: 2.5em;
+  font-weight: 900;
   margin-bottom: 8px;
 }
 #home--new--description {
@@ -103,7 +104,7 @@ section {
   font-size: 40px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-column-gap: 20px;
+  grid-column-gap: 60px;
   padding: 0 10px;
 }
 #home--purchase--header {
@@ -169,10 +170,10 @@ section {
 
 a {
   color: #000;
-  text-decoration: none;
+  text-decoration: underline;
 }
 a:hover {
-  text-decoration: underline;
+  font-style: italic;
 }
 
 h1 {
@@ -260,12 +261,13 @@ input[type=email]::placeholder {
 
 .card {
   font-size: inherit;
+  text-decoration: none;
   width: 100%;
   margin: 0 auto;
   display: inline-block;
 }
 .card-c {
-  height: 608px;
+  height: 408px;
 }
 .card-b {
   height: 400px;
@@ -274,7 +276,7 @@ input[type=email]::placeholder {
   height: 316px;
 }
 .card:hover {
-  text-decoration: none;
+  font-style: normal;
   transform: scale(1.02);
 }
 .card:active .card--img {
@@ -394,7 +396,7 @@ input[type=email]::placeholder {
 }
 
 .stamp-header {
-  color: #C1272D;
+  color: black;
   text-align: center;
   font-size: 2.5em;
   margin: 1em 0 1.5em 0;
@@ -529,7 +531,7 @@ article h1 {
 .post--image {
   margin-top: 50px;
   position: relative;
-  min-width: 775px;
+  max-width: 775px;
   min-height: 500px;
   left: -25px;
   background-size: cover;
