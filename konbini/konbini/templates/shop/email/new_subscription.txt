@@ -1,0 +1,27 @@
+A new subscription
+
+Subscription #{{ subscription.id[4:] }}
+
+{% for item in subscription['items']['data'] %}
+{{ item.plan.nickname }}
+    {{ '${:,.2f}'.format(item.plan.amount/100) }}/{% if item.plan.interval_count > 1 %}{{ item.plan.interval_count }} {% endif %}{{ item.plan.interval }}{% if item.plan.interval_count > 1 %}s{% endif %}
+{% endfor %}
+{% for item in line_items %}
+{{ item.custom.name }}
+    {{ '${:,.2f}'.format(item.amount/100 * item.quantity) }}
+{% endfor %}
+
+{% if shipping %}
+Shipping
+    {{ shipping.name }}
+    {{ shipping.address.line1 }}
+    {% if shipping.address.line2 %}{{ shipping.address.line2 }}{% endif %}
+    {{ shipping.address.city }}
+    {{ shipping.address.state }}
+    {{ shipping.address.postal_code }}
+    {{ shipping.address.country }}
+{% endif %}
+
+{% if label_url %}
+Shipping Label: {{ label_url }}
+{% endif %}

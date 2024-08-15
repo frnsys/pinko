@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ config.SHOP_NAME }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/16.png') }}" sizes="16x16" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/32.png') }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon/96.png') }}" sizes="96x96" />
+</head>
+<body>
+    {% include "shop/_messages.html" %}
+    <header>
+        <div class="header--meta">
+            <a href="{{ url_for('shop.index') }}"><img src="{{ url_for('static', filename='logo.svg') }}" alt="logo" title="logo" class="header--brand"></a>
+        </div>
+        <nav>
+            <ul>
+                {% set cart_size = session.get('cart', {}).values()|sum %}
+                <li><a href="{{ url_for('shop.cart') }}">Cart{% if cart_size > 0 %} ({{ cart_size }}){% endif %}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

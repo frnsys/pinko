@@ -1,0 +1,21 @@
+A new order
+
+{% if label_url %}
+    Shipping Label: {{ label_url }}
+{% endif %}
+{% if rpi_status %}
+  RPI Order Info:
+  {% for k,v in rpi_status.items() %}
+      {{ k }}
+      {{ v }}
+  {% endfor %}
+{% endif %}
+
+Order #{{ order.id[3:] }}
+
+{% for item in items %}
+    {{ item.description }}
+    {{ item.quantity }}
+    {{ '${:,.2f}'.format(item.amount/100) }}
+{% endfor %}
+Total: {{ '${:,.2f}'.format(order.amount/100) }}

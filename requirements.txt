@@ -1,4 +1,4 @@
 sentry-sdk==0.6.9
 git+https://github.com/frnsys/taozi
-git+https://github.com/frnsys/konbini
 APScheduler==3.6.0
+-e konbini

@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="checkout checkout-plan">
+    <h2>Review Order</h2>
+    <h4>Subscription</h4>
+    <table>
+        <tbody>
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ '${:,.2f}'.format(amount/100) }}</td>
+            </tr>
+            {% for item in line_items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ '${:,.2f}'.format(item.amount/100 * item.quantity) }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>Total</td>
+                <td>{{ '${:,.2f}'.format(total/100) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if shipped %}
+        <h4>Shipping to</h4>
+        {% if address_changed %}
+            <div class="checkout--warning">Your address was normalized to the one below. Please check that it's correct.</div>
+        {% endif %}
+        <div>
+            <div>{{ address.name }}</div>
+            <div>{{ address.line1 }}</div>
+            {% if address.line2 %}
+                <div>{{ address.line2 }}</div>
+            {% endif %}
+            <div>{{ address.city }}, {{ address.state }}</div>
+            <div>{{ address.country }}, {{ address.postal_code }}</div>
+        </div>
+    {% endif %}
+    <button id="js-pay">Pay</button>
+</div>
+{% include "shop/_stripe.html" %}
+{% endblock %}
