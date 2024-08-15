@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if product.id.endswith(config.SUBSCRIPTION_PLAN_ID) %}
+    <div class="stamp-header">
+        <div class="stamp">
+            <div>Subscribe</div>
+            <div>Subscribe</div>
+        </div>
+    </div>
+{% endif %}
+<div class="product">
+    <div class="product--gallery">
+        <figure>
+            {% set image = product.images[0] if product.images else product.metadata.image %}
+            <img src="{{ image }}" alt="{{ product.name }}" title="{{ product.name }}" />
+        </figure>
+    </div>
+    <div class="product--info">
+        <h1>{{ product.name }}</h1>
+        <p>{{ (product.description or product.metadata.description)|safe }}</p>
+        <div class="product--skus">
+            {% for plan in plans %}
+                <div class="product--sku">
+                    <form action='{{ url_for('shop.subscribe') }}' method='POST'>
+                        <input type='hidden' name='id' value={{ plan.id }}>
+                        <input type='hidden' name='name' value='{{ product.name }} - {{ plan.nickname }}'>
+                        <input type='hidden' name='price' value='{{ '${:,.2f}'.format(plan.amount/100) }}/{% if plan.interval_count > 1 %}{{ plan.interval_count }} {% endif %}{{ plan.interval }}{% if plan.interval_count > 1 %}s{% endif %}'>
+                        <div class="sku">
+                            <div>
+                                <div class="sku--name">{{ plan.nickname }}</div>
+                                <div class="sku--price">{{ '${:,.2f}'.format(plan.amount/100) }}/{% if plan.interval_count > 1 %}{{ plan.interval_count }} {% endif %}{{ plan.interval }}{% if plan.interval_count > 1 %}s{% endif %}</div>
+                            </div>
+                            <input type="submit" value='Subscribe'>
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% if product.id.endswith(config.SUBSCRIPTION_PLAN_ID) %}
+<div id="faq">
+    <h1>FAQ</h1>
+    <ul>
+        <li>
+            <h2>How can I change my address or billing info?</h2>
+            <p>Manage your <a href="/store/subscribe/manage">subscription settings here</a> or email us at <a href="mailto:subs@pinko.online">subs@pinko.online</a> and we will sort it out.</p>
+        </li>
+        <li>
+            <h2>When can I expect to receive my copy in the mail?</h2>
+            <p>Issues are arriving from the printer by the end of the month. We will hopefully be able to send them off the week following.</p>
+        </li>
+        <li>
+            <h2>Do you ship internationally?</h2>
+            <p>Yes! You should be able to sign up normally and the shipping will be automatically calculated. If you have any problems registering, email us at subs@pinko.online.</p>
+        </li>
+        <li>
+            <h2>How can I carry Pinko in my bookstore, library or infoshop?</h2>
+            <p>Fill out <a href="https://docs.google.com/forms/d/1_CjAGND8XNJ4e9lriS_Oc-gLi4itUeKX0kPKUWv0z8w/edit">this form here</a> and we'll be in touch about wholesale orders.</p>
+        </li>
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+
