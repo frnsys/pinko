@@ -1,0 +1,17 @@
+name: 'deploy'
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: Pull repo and update
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /srv/pinko && /srv/pinko/gh_deploy.sh && exit"
+      - name: cleanup
+        run: rm -rf ~/.ssh
