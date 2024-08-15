@@ -12,6 +12,6 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
       - name: Pull repo and update
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /srv/pinko && /srv/pinko/gh_deploy.sh && exit"
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "/srv/pinko/gh_deploy.sh"
       - name: cleanup
         run: rm -rf ~/.ssh
