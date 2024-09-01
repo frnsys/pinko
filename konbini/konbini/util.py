@@ -9,7 +9,6 @@ def send_email(tos, subject, template, reply_to=None, bcc=None, **kwargs):
                 recipients=tos,
                 reply_to=reply_to,
                 bcc=bcc)
-    print(msg)
     mail = current_app.extensions.get('mail')
     mail.send(msg)
 
