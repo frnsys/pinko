@@ -3,7 +3,7 @@ import stripe
 import json
 import easypost
 from flask import current_app
-from konbini.util import send_email
+from konbini.konbini.util import send_email
 
 
 def get_shipping_rate(products, addr, **config):
