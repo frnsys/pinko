@@ -2,7 +2,7 @@ import config
 import sentry_sdk
 from pinko import routes
 from taozi import create_app
-from flask_konbini import Konbini
+from konbini.flask_konbini import Konbini
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 app = create_app(config, name='pinko', blueprints=[routes])
