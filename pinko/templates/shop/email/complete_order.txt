@@ -10,5 +10,6 @@ Order #{{ order.id[3:] }}
 Total: {{ '${:,.2f}'.format(order.amount/100) }}
 
 {% if tracking_url %}
-    Track your package: {{ tracking_url }}
+Track your package: {{ tracking_url }}
 {% endif %}
+If you ordered a copy of Queer Palestine, you will receive tracking information in a separate email once the order is shipped.

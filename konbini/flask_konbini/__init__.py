@@ -1,7 +1,7 @@
 import stripe
 import easypost
-from ..konbini import core
-from ..konbini.routes import bp
+from konbini import core
+from konbini.routes import bp
 
 class Konbini:
     def __init__(self, app=None):
@@ -12,7 +12,7 @@ class Konbini:
     def init_app(self, app):
         self.app = app
 
-        app.csrf_protect.exempt('konbini.konbini.routes.checkout_completed_hook')
+        app.csrf_protect.exempt('konbini.routes.checkout_completed_hook')
 
         stripe.api_key = app.config['STRIPE_SECRET_KEY']
         easypost.client = easypost.EasyPostClient(app.config['EASYPOST_API_KEY'])
