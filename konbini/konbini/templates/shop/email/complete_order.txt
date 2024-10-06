@@ -9,6 +9,12 @@ Order #{{ order.id[3:] }}
 {% endfor %}
 Total: {{ '${:,.2f}'.format(order.amount/100) }}
 
+{% if urls %}
+  Digital files:
+  {% for name, url in urls.items() %}
+    {{name}}
+  {% endfor %}
+{% endif %}
 {% if tracking_url %}
     Track your package: {{ tracking_url }}
 {% endif %}

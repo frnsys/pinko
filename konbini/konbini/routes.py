@@ -440,6 +440,7 @@ def checkout_completed_hook():
 
             label_url = shipment_meta['easypost'].get('label_url') if shipment_meta.get('easypost') else None
             tracking_url = shipment_meta['easypost'].get('tracking_url') if shipment_meta.get('easypost') else None
+            urls = shipment_meta.get('digital')
             # customerOrderId = shipment_meta['rpi'].get('customerOrderId') if shipment_meta.get('rpi') else None
 
             # Mark as completed
