@@ -453,7 +453,7 @@ def checkout_completed_hook():
 
             # Notify customer
             send_email([customer_email], 'Thank you for your order', 'complete_order',
-                    order=pi, items=items, tracking_url=tracking_url)
+                    order=pi, items=items, tracking_url=tracking_url, urls=urls)
 
     return '', 200
 
