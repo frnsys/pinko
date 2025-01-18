@@ -14,7 +14,7 @@ setup(
         'Flask==2.0.3',
         'Flask-WTF==1.2.1',
         'Flask-Mail==0.9.1',
-        'stripe==2.48.0',
+        'stripe==4.2.0',
         'sentry-sdk==0.6.9',
         'easypost==8.2.1',
         'six==1.12.0',
