@@ -12,14 +12,16 @@ html, body {
     <div class="issue--intro">
         <h1>{{ issue.name }}</h1>
         <p>{{ issue.description|safe }}</p>
-        <div class="issue--shop" style="display:flex">
-            <div>{{'${:,.2f}'.format(product.default_price.unit_amount/100)}}</div>
+        {% if product.default_price %}
+            <div class="issue--shop" style="display:flex">
+                <div>{{'${:,.2f}'.format(product.default_price.unit_amount/100)}}</div>
 
-            <form class="product" action="{{ url_for('shop.cart') }}" method='POST'>
-                {{ form.hidden_tag() }}
-                <input style="margin-left:auto;" type="submit" value='Add to Cart'>
-            </form>
-        </div>
+                <form class="product" action="{{ url_for('shop.cart') }}" method='POST'>
+                    {{ form.hidden_tag() }}
+                    <input style="margin-left:auto;" type="submit" value='Add to Cart'>
+                </form>
+            </div>
+        {% endif %}
     </div>
 </div>
 <div id="issue--grid">
