@@ -70,7 +70,9 @@ def issue(slug):
     product_id = issue['product_id']
     product = get_product(product_id) if product_id else ''
 
-    form = AddToCartForm(name=product.name, sku=product.default_price.id, product=product.id)
+    form = None
+    if product.default_price:
+        form = AddToCartForm(name=product.name, sku=product.default_price.id, product=product.id)
 
     issue.description = compile_markdown(issue['description'])
     return render_template('issue.html', issue=issue, product=product, form=form)
